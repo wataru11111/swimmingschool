@@ -1,24 +1,40 @@
-# README
+# ジュニアスイミングスクール
+​
+## サイト概要
+### 公式サイト
+<!--何を『目的』とし、どのような『分類』なのかを簡潔に書く-->
+​スクール時間やスクール営業日を確認したり振替日を予約したりできる公式サイト
+### テーマを選んだ理由
+<!--なぜこのようなテーマにしたかを説明する-->
+​現在働いているジュニアスイミングスクールなのですが、ホームページもなく、
+新規のお客様に気づいてもらうのにはビラ配りをしたりしてました。
+もっと多くの人にここにこんなスクールがあるんだよって気づいてもらいたく、
+更には今来てくださってるお客様により良く通って頂きたいと考え、
+このテーマにしました。
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+### ターゲットユーザ
+<!--誰に使ってもらうかを具体的に記載する-->
+・今通ってくださってるお客様
+・新しく通ってくださるお客様
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+### 主な利用シーン
+<!--どのような時に使うのかの状況を記載すること-->
+・情報共有、予定を確認する時
+・スイミングを習いたい時
+・振替日を予約する時
+​
+## 設計書
+<!--テーマを設定・提出する時点では不要です-->
+​
+## 開発環境
+- OS：Linux(CentOS)
+- 言語：HTML,CSS,JavaScript,Ruby,SQL
+- フレームワーク：Ruby on Rails
+- JSライブラリ：jQuery
+- IDE：Cloud9
+​
+## 使用素材
+- 外部サービスの画像素材・音声素材を使用した場合は、必ずサービス名とURLを明記してください。
+- アプリケーションの実装に使用したgem/bootstrapのリファレンスなどの記載は不要です。
+- 使用しない場合は、使用素材の項目をREADMEから削除してください。
+折りたたむ
