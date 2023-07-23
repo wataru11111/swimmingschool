@@ -1,4 +1,38 @@
 Rails.application.routes.draw do
+  namespace :admin do
+    get 'calendar/index'
+    get 'calendar/new'
+    get 'calendar/edit'
+    get 'calendar/update'
+  end
+  namespace :admin do
+    get 'homes/top'
+  end
+  namespace :admin do
+    get 'customers/show'
+    get 'customers/edit'
+    get 'customers/update'
+    get 'customers/index'
+  end
+  namespace :public do
+    get 'date/new'
+    get 'date/confirmation'
+    get 'date/completion'
+    get 'date/index'
+    get 'date/show'
+  end
+  namespace :public do
+    get 'calendar/index'
+  end
+  namespace :public do
+    get 'customers/show'
+    get 'customers/edit'
+    get 'customers/update'
+  end
+  namespace :public do
+    get 'homes/top'
+    get 'homes/about'
+  end
   devise_for :customers,skip: [:passwords], controllers: {
   registrations: "public/registrations",
   sessions: 'public/sessions'
