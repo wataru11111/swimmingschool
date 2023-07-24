@@ -1,3 +1,3 @@
 class Transfer < ApplicationRecord
-  has_many :child
+  belongs_to :child
 end

@@ -1,4 +1,4 @@
 class Child < ApplicationRecord
-  has_many :customer
-  belongs_to :transfer
+  belongs_to :customer
+  has_many :transfer
 end

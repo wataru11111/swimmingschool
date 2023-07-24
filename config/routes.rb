@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  namespace :public do
+    get 'child/new'
+    get 'child/edit'
+  end
   #namespace :admin do
    # get 'calendar/index'
     #get 'calendar/new'
@@ -58,6 +62,7 @@ Rails.application.routes.draw do
 
     get '/calender/index' => "calendar#index"
 
+    resources :child, only: [:new,:edit,:update, :create]
 
     get '/customers/show' => "customers#show"
     get '/customers/information/edit' => "customers#edit"

@@ -30,9 +30,10 @@ ActiveRecord::Schema.define(version: 2023_07_23_133000) do
     t.string "first_name", null: false
     t.string "last_name_kana", null: false
     t.string "first_name_kana", null: false
-    t.integer "contact time", null: false
-    t.string "contact dey", null: false
-    t.string "class", null: false
+    t.integer "contact_time", null: false
+    t.string "contact_dey", null: false
+    t.string "level", null: false
+    t.string "telephone_number", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -63,7 +64,7 @@ ActiveRecord::Schema.define(version: 2023_07_23_133000) do
     t.string "day off", null: false
     t.integer "transfer time", null: false
     t.string "telephone_number", null: false
-    t.string "class", null: false
+    t.string "level", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

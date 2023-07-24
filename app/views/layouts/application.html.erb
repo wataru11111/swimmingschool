@@ -14,7 +14,7 @@
     <header>
       <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
-          <%= link_to "LOGO", root_path, class: 'nav-link text-light' %>
+          <%= link_to "JSC", root_path, class: 'nav-link text-light' %>
 
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
                         aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -32,8 +32,8 @@
             </li>
 
             <li class="nav-item">
-              <%= link_to items_path, class: 'nav-link text-light' do %>
-              <i class="fas fa-users"></i>商品一覧
+              <%= link_to new_child_path, class: 'nav-link text-light' do %>
+              <i class="fas fa-link"></i>お子さん登録
               <% end %>
             </li>
 
@@ -75,13 +75,6 @@
             </li>
 
             <% else %>
-
-
-            <li class="nav-item">
-              <%= link_to calender_index_path, class: 'nav-link text-light' do %>
-              <i class="fas fa-link"></i>About
-              <% end %>
-            </li>
 
             <li class="nav-item">
               <%= link_to  new_customer_registration_path, class: 'nav-link text-light' do %>
