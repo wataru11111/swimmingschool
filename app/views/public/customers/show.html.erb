@@ -1,2 +1,89 @@
-<h1>Public::Customers#show</h1>
-<p>Find me in app/views/public/customers/show.html.erb</p>
+
+<div class="container">
+ <h2>マイページ</h2>
+ <h2>登録情報</h2>
+ <%= link_to customers_information_edit_path do %>
+<p>編集する</p>
+<% end %>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>氏名</th>
+      <th>カナ</th>
+      <th>郵便番号</th>
+      <th>住所</th>
+      <th>電話番号</th>
+      <th>メールアドレス</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+    <td>
+      <%= current_customer.last_name %> <%= current_customer.first_name %>
+   </td>
+    <td>
+      <%= current_customer.last_name_kana %> <%= current_customer.first_name_kana %>
+    </td>
+   <td>
+      <%= current_customer.postal_code %>
+   </td>
+   <td>
+      <%= current_customer.address %>
+   </td>
+   <td>
+      <%= current_customer.telephone_number %>
+    <td>
+      <%= current_customer.email %>
+   </td>
+   </td>
+  </tr>
+  </tbody>
+</table>
+
+<%# @child.each do |child| 繰り返し行いたい %>
+
+<h2>お子さん情報</h2>
+<%= link_to customers_information_edit_path do %>
+<p>編集する</p>
+<% end %>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>氏名</th>
+        <th>カナ</th>
+        <th>クラス</th>
+        <th>契約曜日</th>
+        <th>契約時間</th>
+      </tr>
+    </thead>
+
+    <tbody><%#お子さんの情報を入れたい%>
+      <tr>
+      <td>
+        <%#=ログインしている人のお子さんの名前  %> <%#= current_customer.child.first_name %>
+     </td>
+      <td>
+        <%#= current_customer.child.last_name_kana %> <%#= current_customer.child.first_name_kana %>
+      </td>
+     <td>
+        <%#= current_customer.postal_code %>
+     </td>
+     <td>
+        <%#= current_customer.address %>
+     </td>
+     <td>
+        <%#= current_customer.telephone_number %>
+      <td>
+        <%#= current_customer.email %>
+     </td>
+     </td>
+    </tr>
+    </tbody>
+  </table>
+<%# end %>
+
+<%= link_to 'お休み登録', offs_path, class: "btn btn-sm btn-danger" %>
+
+</div>

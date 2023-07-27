@@ -1,0 +1,37 @@
+<div class="container">
+ <h2>お休み確定</h2>
+ <h4>お休み確定致しました。</h4><br>
+ <h4>ご登録ありがとうございました。</h4><br>
+
+  <table class="table">
+    <thead>
+      <P>お休み情報</P>
+      <tr>
+        <th>お休み日</th>
+        <th>契約曜日</th>
+        <th>契約時間</th>
+        <th>クラス</th>
+      </tr>
+    </thead>
+  <% end %>
+    <tbody>
+      <% @offs.each do |off| %>
+      <tr>
+      <td>
+        <%= off.off_day %>
+      </td>
+      <td>
+        <%= child.contact_time %>
+      </td>
+      <td>
+        <%= child.contact_dey %>
+      </td>
+
+    <td>
+    <%= child.contact_level %>
+    </td>
+    <% end %>
+
+    </tbody>
+  </table>
+</div>

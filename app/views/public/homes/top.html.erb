@@ -1,2 +1,15 @@
-<h1>Public::Homes#top</h1>
-<p>Find me in app/views/public/homes/top.html.erb</p>
+<div class="container">
+    <h1>JSC</h1>
+
+    <%#画像をつける%>
+
+    <%#お知らせ通知%>
+
+    <%= link_to '入会・体験についてはこちら', about_path, class: "btn btn-sm btn-danger" %><br />
+<br />
+    <%= link_to 'スケジュール表', calender_index_path, class: "btn btn-sm btn-danger" %><br />
+<br />
+    <%= link_to 'お休み登録', root_path, class: "btn btn-sm btn-danger" %><br />
+<br />
+    <%= link_to '振替日登録', root_path, class: "btn btn-sm btn-danger" %>
+

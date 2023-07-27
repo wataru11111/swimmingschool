@@ -1,1 +1,24 @@
 @use '~bootstrap/scss/bootstrap';
+
+.fc-daygrid-day-number {
+  font-size: 30px;
+}
+
+
+.fc-day-wed {
+  background: #E1F5FE;
+}
+
+.fc-day-thu {
+  background: #C5E1A5;
+}
+
+.fc-day-sat {
+  background: #FFD54F;
+}
+
+.fc-day-sun {
+  background: #F48FB1;
+}
+
+

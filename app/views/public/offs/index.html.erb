@@ -1,0 +1,18 @@
+<div id='calendar'></div>
+
+<div class="container">
+<%= form_with model: @offs,url:offs_path, method: :post do |f| %>
+
+<div class="field">
+  <%= f.label :お休み日 %><br />
+  <%= f.text_field :off_day %>
+</div>
+
+  <div class=row>
+   <div class="actions"><br>
+  <%= f.submit "保存" %>
+  </div>
+</div>
+
+<% end %>
+</div>
