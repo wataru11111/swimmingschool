@@ -5,8 +5,8 @@ class CreateOffs < ActiveRecord::Migration[6.1]
       t.integer  "off_day",            null: false
       t.string   "level",              null: false
       t.string  "flag",                null: false
-      t.string   "contact time",       null: false
-      t.string   "contact dey",        null: false
+      t.string   "contact_time",       null: false
+      t.string   "contact_dey",        null: false
 
       t.timestamps
     end

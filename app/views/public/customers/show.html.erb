@@ -1,6 +1,7 @@
 
 <div class="container">
  <h2>マイページ</h2>
+ <h2>お休みした数 </h2>
  <h2>登録情報</h2>
  <%= link_to customers_information_edit_path do %>
 <p>編集する</p>
@@ -41,10 +42,10 @@
   </tbody>
 </table>
 
-<%# @child.each do |child| 繰り返し行いたい %>
+<% current_customer.child.each do |child| %>
 
 <h2>お子さん情報</h2>
-<%= link_to customers_information_edit_path do %>
+<%= link_to edit_child_path(child) do %>
 <p>編集する</p>
 <% end %>
 
@@ -56,33 +57,35 @@
         <th>クラス</th>
         <th>契約曜日</th>
         <th>契約時間</th>
+        <th>お休み</th>
       </tr>
     </thead>
 
-    <tbody><%#お子さんの情報を入れたい%>
+    <tbody>
       <tr>
       <td>
-        <%#=ログインしている人のお子さんの名前  %> <%#= current_customer.child.first_name %>
+        <%= child.last_name %> <%= child.first_name %>
      </td>
       <td>
-        <%#= current_customer.child.last_name_kana %> <%#= current_customer.child.first_name_kana %>
+        <%= child.last_name_kana %> <%= child.first_name_kana %>
       </td>
      <td>
-        <%#= current_customer.postal_code %>
+        <%= child.level %>
      </td>
      <td>
-        <%#= current_customer.address %>
+        <%= child.contact_time %>
      </td>
      <td>
-        <%#= current_customer.telephone_number %>
-      <td>
-        <%#= current_customer.email %>
+        <%= child.contact_dey %>
      </td>
+     <td>
+        <%= Off.where(child_id: child.id,flag: 0).count %>日
      </td>
+
     </tr>
     </tbody>
   </table>
-<%# end %>
+<% end %>
 
 <%= link_to 'お休み登録', offs_path, class: "btn btn-sm btn-danger" %>
 

@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
- 
+
   devise_for :customers,skip: [:passwords], controllers: {
   registrations: "public/registrations",
   sessions: 'public/sessions'
@@ -19,7 +19,8 @@ Rails.application.routes.draw do
     root to: 'homes#top'
 
     post 'dates/confirmation' => "orders#confirmation"
-    get 'dates/completion' => "orders#completion"
+    get 'dates/completion' => "date#completion"
+
     resources :date, only: [:show, :index, :new, :create]
     resources :offs, only: [:update, :create, :index, :new]
 

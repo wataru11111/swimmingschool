@@ -14,6 +14,14 @@ class Public::ChildController < ApplicationController
   end
 
   def edit
+    @child = current_customer.child
+  end
+
+  def update
+    child = current_customer.child
+    @child = child
+    @child.update(child_params)
+    redirect_to customers_show_path
   end
 
 

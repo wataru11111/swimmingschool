@@ -8,8 +8,8 @@ class Public::CustomersController < ApplicationController
   end
 
   def update
-     @cart_item = current_customer
-    @cart_item.update(customer_params)
+    @customer = current_customer
+    @customer.update(customer_params)
     redirect_to customers_show_path
   end
 end

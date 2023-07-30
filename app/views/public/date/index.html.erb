@@ -1,2 +1,62 @@
-<h1>Public::Date#index</h1>
-<p>Find me in app/views/public/date/index.html.erb</p>
+<div id='calendar'></div>
+<div class="container">
+
+<P class="fc-day-sun">日曜日</P>
+<P>12:00〜13:00     2歳カニ〜青星4</P>
+<P>13:00〜14:00     3歳カニ〜ピンク</P>
+<P>14:00〜15:00     黄星2〜ピンク</P>
+<P>17:00〜18:00     3歳カニ〜ピンク</P>
+<br />
+<P class="fc-day-wed">水曜日</P>
+<P>14:30〜15:30     年少年中·年長</P>
+<P>15:15〜16:15     年中・年長·小学生</P>
+<P>19:30〜20:30    小学生</P>
+<br />
+<P class="fc-day-thu">木曜日</P>
+<P>14:30〜15:30     年少</P>
+<P>15:00〜16:00    年中·年長</P>
+<br />
+<P class="fc-day-sat">土曜日</P>
+<P>16:00〜17:00     3歳カニ〜ピンク</P>
+<P>17:00〜18:00     イルカ〜ピンク</P>
+<P>18:00〜19:00     小学生</P>
+</div>
+
+
+<%= form_with model: @date,url:date_index_path, method: :post do |f| %>
+
+
+  
+<div class="field">
+  <%= f.label :名前 %><br />
+  <%= f.text_field :child_first_nama %>
+</div>
+
+<div class="field">
+  <%= f.label :振替日 %><br />
+  <%= f.text_field :transfer_date %>
+</div>
+
+<div class="field">
+  <%= f.label :振替時間 %><br />
+  <%= f.text_field :transfer_time %>
+</div>
+
+<div class="field">
+  <%= f.label :クラス %><br />
+  <%= f.text_field :level %>
+</div>
+
+<div class="field">
+  <%= f.label :電話番号（ハイフンなし） %><br />
+  <%= f.text_field :telephone_number, autofocus: true, autocomplete: "telephone_number" %>
+</div>
+
+<div class=row>
+  <div class="actions"><br>
+  <%= f.submit "振替申込み" %>
+  </div>
+</div>
+
+<% end %>
+</div>

@@ -1,2 +1,35 @@
-<h1>Public::Date#completion</h1>
-<p>Find me in app/views/public/date/completion.html.erb</p>
+<div class="container">
+ <h2>振替日確定</h2>
+ <h4>振替日確定致しました。</h4>
+ <h4>ご登録ありがとうございました。</h4>
+
+ <table class="table">
+  <thead>
+   <tr>
+    <th>お休み日</th>
+    <th>振替日</th>
+    <th>振替時間</th>
+    <th>クラス</th>
+   </tr>
+  </thead>
+
+  <% @dates.each do |date| %>
+  <tbody>
+   <tr>
+    <td>
+      <%= date.off.off_day %>
+    </td>
+    <td>
+      <%= date.transfer_date %>
+    </td>
+    <td>
+      <%= date.transfer_time %>
+    </td>
+    <td>
+      <%= date.level %>
+    </td>
+   </tr>
+  </tbody>
+  <% end %>
+ </table>
+</div>

@@ -13,7 +13,6 @@
         <th>クラス</th>
       </tr>
     </thead>
-  <% end %>
     <tbody>
       <% @offs.each do |off| %>
       <tr>
@@ -21,14 +20,14 @@
         <%= off.off_day %>
       </td>
       <td>
-        <%= child.contact_time %>
+        <%= off.child.contact_time %>
       </td>
       <td>
-        <%= child.contact_dey %>
+        <%= off.child.contact_dey %>
       </td>
 
     <td>
-    <%= child.contact_level %>
+    <%= off.child.level %>
     </td>
     <% end %>
 

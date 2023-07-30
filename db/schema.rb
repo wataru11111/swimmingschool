@@ -26,12 +26,11 @@ ActiveRecord::Schema.define(version: 2023_07_26_075636) do
 
   create_table "children", force: :cascade do |t|
     t.integer "customer_id", null: false
-    t.string "off_id", null: false
     t.string "last_name", null: false
     t.string "first_name", null: false
     t.string "last_name_kana", null: false
     t.string "first_name_kana", null: false
-    t.integer "contact_time", null: false
+    t.string "contact_time", null: false
     t.string "contact_dey", null: false
     t.string "level", null: false
     t.string "telephone_number", null: false
@@ -64,8 +63,8 @@ ActiveRecord::Schema.define(version: 2023_07_26_075636) do
     t.integer "off_day", null: false
     t.string "level", null: false
     t.string "flag", null: false
-    t.string "contact time", null: false
-    t.string "contact dey", null: false
+    t.string "contact_time", null: false
+    t.string "contact_dey", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -73,8 +72,8 @@ ActiveRecord::Schema.define(version: 2023_07_26_075636) do
   create_table "transfers", force: :cascade do |t|
     t.integer "child_id", null: false
     t.string "off_id", null: false
-    t.string "transfer date", null: false
-    t.integer "transfer time", null: false
+    t.string "transfer_date", null: false
+    t.integer "transfer_time", null: false
     t.string "telephone_number", null: false
     t.string "level", null: false
     t.datetime "created_at", precision: 6, null: false
