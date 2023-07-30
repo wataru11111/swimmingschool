@@ -12,7 +12,7 @@ class Public::DateController < ApplicationController
     @transfer.off_id = off.id
     if @transfer.save!
       off.update(flag: 1)
-      redirect_to dates_completion_path
+      redirect_to dates_completion_path(id: @transfer.id)
     else
       render :index
     end
@@ -20,17 +20,17 @@ class Public::DateController < ApplicationController
 
   def index
     @date = Transfer.new
-     #@date = Date.all
   end
 
 
   def confirmation
-
+     #@dates = Transfer.find(params[:id])
+    @dates = Transfer.all
   end
 
   def completion
-    @dates = Transfer.all
-    #off = current_customer.child.off
+    @dates = Transfer.find(params[:id])
+    #@dates = Transfer.all
   end
 
   def show

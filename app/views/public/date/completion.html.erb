@@ -13,23 +13,23 @@
    </tr>
   </thead>
 
-  <% @dates.each do |date| %>
+  <%# @dates.each do |date| %>
   <tbody>
    <tr>
     <td>
-      <%= date.off.off_day %>
+      <%= @dates.off.off_day %>
     </td>
     <td>
-      <%= date.transfer_date %>
+      <%= @dates.transfer_date %>
     </td>
     <td>
-      <%= date.transfer_time %>
+      <%= @dates.transfer_time %>
     </td>
     <td>
-      <%= date.level %>
+      <%= @dates.level %>
     </td>
    </tr>
   </tbody>
-  <% end %>
+  <%# end %>
  </table>
 </div>

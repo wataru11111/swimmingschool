@@ -1,2 +1,59 @@
-<h1>Admin::Customers#show</h1>
-<p>Find me in app/views/admin/customers/show.html.erb</p>
+<div class="container">
+ <h2>会員詳細</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>会員ID</th>
+      <th>氏名</th>
+      <th>カナ</th>
+      <th>郵便番号</th>
+      <th>住所</th>
+      <th>電話番号</th>
+      <th>メールアドレス</th>
+      <th>ステータス</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+    <td>
+      <%= @customer.id %>
+   </td>
+    <td>
+      <%= @customer.last_name %> <%= @customer.first_name %>
+   </td>
+    <td>
+      <%= @customer.last_name_kana %> <%= @customer.first_name_kana %>
+    </td>
+   <td>
+      <%= @customer.postal_code %>
+   </td>
+   <td>
+      <%= @customer.address %>
+   </td>
+   <td>
+      <%= @customer.telephone_number %>
+   </td>
+    <td>
+      <%= @customer.email %>
+   </td>
+      <td>
+   <%if @customer.is_deleted %>
+      <h4>退会</h4>
+      <% else %>
+      <h4>有効</h4>
+      <% end %>
+      </td>
+  </tr>
+  </tbody>
+</table>
+
+<%= link_to admin_path do %>
+<p>注文履歴一覧を見る</p>
+<% end %>
+
+<%= link_to edit_admin_customer_path do %>
+<p>編集する</p>
+<% end %>
+
+</div>

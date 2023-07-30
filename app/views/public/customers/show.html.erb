@@ -1,7 +1,6 @@
 
 <div class="container">
  <h2>マイページ</h2>
- <h2>お休みした数 </h2>
  <h2>登録情報</h2>
  <%= link_to customers_information_edit_path do %>
 <p>編集する</p>
@@ -87,6 +86,10 @@
   </table>
 <% end %>
 
-<%= link_to 'お休み登録', offs_path, class: "btn btn-sm btn-danger" %>
+<%= link_to 'お休み登録', offs_path, class: "btn btn-sm btn-danger" %><br/>
+<br/>
+<%= link_to '振替日登録', date_index_path, class: "btn btn-sm btn-danger" %><br/>
+<br/>
+<%= link_to '振替 履歴',dates_confirmation_path, class: "btn btn-sm btn-danger" %>
 
 </div>

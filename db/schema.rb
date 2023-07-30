@@ -73,7 +73,7 @@ ActiveRecord::Schema.define(version: 2023_07_26_075636) do
     t.integer "child_id", null: false
     t.string "off_id", null: false
     t.string "transfer_date", null: false
-    t.integer "transfer_time", null: false
+    t.string "transfer_time", null: false
     t.string "telephone_number", null: false
     t.string "level", null: false
     t.datetime "created_at", precision: 6, null: false

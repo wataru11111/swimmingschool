@@ -18,7 +18,7 @@ Rails.application.routes.draw do
   scope module: :public do
     root to: 'homes#top'
 
-    post 'dates/confirmation' => "orders#confirmation"
+    get 'dates/confirmation' => "date#confirmation"
     get 'dates/completion' => "date#completion"
 
     resources :date, only: [:show, :index, :new, :create]

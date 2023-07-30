@@ -2,7 +2,6 @@ class Public::OffsController < ApplicationController
 
  def new
     @off = Off.find(params[:id])
-    @offs = Off.all
  end
 
  def create

@@ -14,22 +14,22 @@
       </tr>
     </thead>
     <tbody>
-      <% @offs.each do |off| %>
+      <%# @offs.each do |off| %>
       <tr>
       <td>
-        <%= off.off_day %>
+        <%= @off.off_day %>
       </td>
       <td>
-        <%= off.child.contact_time %>
+        <%= @off.child.contact_time %>
       </td>
       <td>
-        <%= off.child.contact_dey %>
+        <%= @off.child.contact_dey %>
       </td>
 
     <td>
-    <%= off.child.level %>
+    <%= @off.child.level %>
     </td>
-    <% end %>
+    <%# end %>
 
     </tbody>
   </table>

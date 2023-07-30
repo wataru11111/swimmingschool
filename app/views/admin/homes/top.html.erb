@@ -1,2 +1,76 @@
-<h1>Admin::Homes#top</h1>
-<p>Find me in app/views/admin/homes/top.html.erb</p>
+<div class="container">
+
+<h1>振替 お休み 一覧</h1>
+
+<table class="table">
+  <thead>
+    <P>振替情報</P>
+   <tr>
+    <th>お休み日</th>
+    <th>氏名</th>
+    <th>振替日</th>
+    <th>振替時間</th>
+    <th>クラス</th>
+   </tr>
+  </thead>
+
+  <% @dates.each do |date| %>
+  <tbody>
+   <tr>
+    <td>
+      <%= date.off.off_day %>
+    </td>
+     <td>
+      <%= date.child.last_name %> <%= date.child.first_name %>
+    </td>
+    <td>
+      <%= date.transfer_date %>
+    </td>
+    <td>
+      <%= date.transfer_time %>
+    </td>
+    <td>
+      <%= date.level %>
+    </td>
+   </tr>
+  </tbody>
+  <% end %>
+ </table>
+</div>
+
+
+<table class="table">
+    <thead>
+      <P>お休み情報</P>
+      <tr>
+        <th>お休み日</th>
+        <th>氏名</th>
+        <th>契約曜日</th>
+        <th>契約時間</th>
+        <th>クラス</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%@offs.each do |off| %>
+      <tr>
+      <td>
+        <%= off.off_day %>
+      </td>
+      <td>
+      <%= off.child.last_name %> <%= off.child.first_name %>
+      </td>
+      <td>
+        <%= off.child.contact_time %>
+      </td>
+      <td>
+        <%= off.child.contact_dey %>
+      </td>
+
+    <td>
+    <%= off.child.level %>
+    </td>
+    <% end %>
+
+    </tbody>
+  </table>
+</div>
