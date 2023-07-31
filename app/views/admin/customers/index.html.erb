@@ -8,6 +8,7 @@
       <th>会員ID</th>
       <th>氏名</th>
       <th>メールアドレス</th>
+      <th>電話番号</th>
       <th>ステータス</th>
     </tr>
  </thead>
@@ -25,6 +26,9 @@
 </td>
 <td>
 <%= customers.email %>
+</td>
+<td>
+<%= customers.telephone_number %>
 </td>
 <td>
 <%if customers.is_deleted %>

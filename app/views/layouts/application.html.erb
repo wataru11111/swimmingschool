@@ -51,15 +51,14 @@
 
             <% elsif admin_signed_in? %>
              <li class="nav-item">
-             <!--<li class="nav-item">
-              <%#= link_to admin_customers_path, class: 'nav-link text-light' do %>
+              <%= link_to admin_customers_path, class: 'nav-link text-light' do %>
               <i class="fas fa-users"></i>会員一覧
-              <%# end %>
-            </li>-->
+              <% end %>
+            </li>
 
              <li class="nav-item">
               <%= link_to admin_path, class: 'nav-link text-light' do %>
-              <i class="fas fa-users"></i>注文履歴一覧
+              <i class="fas fa-users"></i>振替お休み一覧
               <% end %>
             </li>
 
