@@ -7,6 +7,8 @@
     <thead>
       <P>お休み情報</P>
       <tr>
+        <th>お子さんの姓</th>
+        <th>お子さんの名</th>
         <th>お休み日</th>
         <th>契約曜日</th>
         <th>契約時間</th>
@@ -14,23 +16,46 @@
       </tr>
     </thead>
     <tbody>
-      <%# @offs.each do |off| %>
       <tr>
-      <td>
-        <%= @off.off_day %>
-      </td>
-      <td>
-        <%= @off.child.contact_time %>
-      </td>
-      <td>
-        <%= @off.child.contact_dey %>
-      </td>
-
-    <td>
-    <%= @off.child.level %>
-    </td>
-    <%# end %>
-
+        <td>
+          <% if @off.child %>
+            <%= @off.child.last_name %>
+          <% else %>
+            データが見つかりません
+          <% end %>
+        </td>
+        <td>
+          <% if @off.child %>
+            <%= @off.child.first_name %>
+          <% else %>
+            データが見つかりません
+          <% end %>
+        </td>
+        <td>
+          <%= @off.off_day %>
+        </td>
+        <td>
+          <% if @off.child %>
+            <%= @off.child.contact_time %>
+          <% else %>
+            データが見つかりません
+          <% end %>
+        </td>
+        <td>
+          <% if @off.child %>
+            <%= @off.child.contact_dey %>
+          <% else %>
+            データが見つかりません
+          <% end %>
+        </td>
+        <td>
+          <% if @off.child %>
+            <%= @off.child.level %>
+          <% else %>
+            データが見つかりません
+          <% end %>
+        </td>
+      </tr>
     </tbody>
   </table>
 </div>

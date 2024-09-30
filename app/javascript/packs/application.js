@@ -8,10 +8,13 @@ import Turbolinks from "turbolinks"
 import * as ActiveStorage from "@rails/activestorage"
 import "channels"
 
+
+
 import "jquery";
 import "popper.js";
 import "bootstrap";
 import "../stylesheets/application";
+import "../custom/date_form";// ここでカスタムスクリプトをインポートする
 
 Rails.start()
 Turbolinks.start()
@@ -22,10 +25,10 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 
 document.addEventListener('turbolinks:load', function () {
     const calendarEl = document.getElementById('calendar');
-
-    const calendar = new Calendar(calendarEl, {
-        plugins: [dayGridPlugin]
-    });
-
-    calendar.render();
+    if (calendarEl) {  // 要素が存在する場合のみ初期化
+        const calendar = new Calendar(calendarEl, {
+            plugins: [dayGridPlugin]
+        });
+        calendar.render();
+    }
 });

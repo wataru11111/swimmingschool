@@ -48,6 +48,37 @@
   </tbody>
 </table>
 
+<% @customer.child.each do |child| %>
+  <h2>お子さん情報</h2>
+  <%= link_to edit_child_path(child) do %>
+    <p>編集する</p>
+  <% end %>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>氏名</th>
+        <th>カナ</th>
+        <th>クラス</th>
+        <th>契約曜日</th>
+        <th>契約時間</th>
+        <th>お休み</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr>
+        <td><%= child.last_name %> <%= child.first_name %></td>
+        <td><%= child.last_name_kana %> <%= child.first_name_kana %></td>
+        <td><%= child.level %></td>
+        <td><%= child.contact_time %></td>
+        <td><%= child.contact_dey %></td>
+        <td><%= Off.where(child_id: child.id, flag: 0).count %>日</td>
+      </tr>
+    </tbody>
+  </table>
+<% end %>
+
 <%= link_to admin_path do %>
 <p>注文履歴一覧を見る</p>
 <% end %>

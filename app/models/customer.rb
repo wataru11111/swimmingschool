@@ -7,6 +7,7 @@ class Customer < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
 
   has_many :child
+  has_many :children
   
   validates :last_name, presence: true
   validates :last_name_kana, presence: true
