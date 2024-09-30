@@ -17,28 +17,28 @@
 <%= form_with model: @date, url: date_index_path, method: :post do |f| %>
 
   <div class="field">
-    <%= f.label :苗字 %><br />
-    <%= f.text_field :last_name %>
+    <%= f.label :last_name, "苗字", for: "last_name" %><br />
+    <%= f.text_field :last_name, id: "last_name" %>
   </div>
 
   <div class="field">
-    <%= f.label :名前 %><br />
-    <%= f.text_field :first_name %>
+    <%= f.label :first_name, "名前", for: "first_name" %><br />
+    <%= f.text_field :first_name, id: "first_name" %>
   </div>
 
   <div class="field">
-    <%= f.label :振替日 %><br />
-    <%= f.select :contact_dey, [["土曜日", "土曜日"], ["日曜日", "日曜日"]], include_blank: "曜日選択", id: "contact_dey" %>
-  </div>
+  <%= f.label :contact_dey, "振替日", for: "contact_dey" %><br />
+  <%= f.select :contact_dey, [["土曜日", "土曜日"], ["日曜日", "日曜日"]], { include_blank: "曜日選択" }, { id: "contact_dey" } %>
+</div>
+
+<div class="field">
+  <%= f.label :contact_time, "振替時間", for: "contact_time" %><br />
+  <%= f.select :contact_time, [], { include_blank: "時間選択" }, { id: "contact_time" } %>
+</div>
 
   <div class="field">
-    <%= f.label :振替時間 %><br />
-    <%= f.select :contact_time, [], include_blank: "時間選択", id: "contact_time" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :電話番号（ハイフンなし） %><br />
-    <%= f.text_field :telephone_number, autofocus: true, autocomplete: "telephone_number" %>
+    <%= f.label :telephone_number, "電話番号（ハイフンなし）", for: "telephone_number" %><br />
+    <%= f.text_field :telephone_number, id: "telephone_number", autofocus: true, autocomplete: "telephone_number" %>
   </div>
 
   <div class="row">
