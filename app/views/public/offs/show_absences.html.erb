@@ -1,0 +1,27 @@
+<h1>お休み確認ページ</h1>
+<p>以下の日付でお休みしています:</p>
+<h1><%= @child.last_name %> <%= @child.first_name %>さんのお休み一覧</h1>
+
+<ul>
+  <% @offs.each do |off| %>
+    <li>
+      <% begin %>
+        <% # Date.newの生成時にエラーチェックを行う %>
+        <% date = Date.new(Date.today.year, off.off_month, off.off_day) %>
+        <%= date.strftime("%m月 %d日") %> <!-- 日付を「11月07日」のように表示 -->
+
+        <% if Date.today < date %>
+          <!-- 変更ボタン -->
+          <%= link_to '変更する', edit_absence_off_path(off), class: "btn btn-sm btn-warning" %>
+          <!-- 削除ボタン -->
+          <%= link_to '削除', off_path(off), method: :delete, data: { confirm: "本当にこのお休みをキャンセルしますか？" }, class: "btn btn-sm btn-danger" %>
+        <% end %>
+      <% rescue ArgumentError => e %>
+        <p>無効な日付: 月=<%= off.off_month %>, 日=<%= off.off_day %> (エラー: <%= e.message %>)</p>
+      <% end %>
+    </li>
+  <% end %>
+</ul>
+
+
+<%= link_to '戻る', customers_show_path %>

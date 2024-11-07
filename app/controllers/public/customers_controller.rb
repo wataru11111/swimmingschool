@@ -1,6 +1,7 @@
 class Public::CustomersController < ApplicationController
-  def show
-    @child = Child.new
+  def  show
+    @customer = current_customer
+    @children = @customer.children
   end
 
   def edit

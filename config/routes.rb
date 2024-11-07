@@ -1,16 +1,16 @@
 Rails.application.routes.draw do
-devise_for :customers, skip: [ :passwords ], controllers: {
-  registrations: "public/registrations",
-  sessions: 'public/sessions'
-}
-  devise_for :admin, skip: [ :registrations, :passwords ], controllers: {
-  sessions: "admin/sessions"
-}
+  devise_for :customers, skip: [:passwords], controllers: {
+    registrations: "public/registrations",
+    sessions: 'public/sessions'
+  }
+  devise_for :admin, skip: [:registrations, :passwords], controllers: {
+    sessions: "admin/sessions"
+  }
 
   namespace :admin do
     get '/' => "homes#top"
-    resources :calendar, only: [ :new, :index, :edit, :create, :update ]
-    resources :customers, only: [ :show, :index, :edit, :update ]
+    resources :calendar, only: [:new, :index, :edit, :create, :update]
+    resources :customers, only: [:show, :index, :edit, :update]
   end
 
   scope module: :public do
@@ -19,22 +19,29 @@ devise_for :customers, skip: [ :passwords ], controllers: {
     get 'dates/confirmation' => "date#confirmation"
     get 'dates/completion' => "date#completion"
 
-    resources :date, only: [ :show, :index, :new, :create ]
-    resources :offs, only: [ :update, :create, :index, :new ]
-
+    resources :date, only: [:show, :index, :new, :create]
+    
+    resources :offs do
+      member do
+        get :show_absences    # お休み確認ページ
+        get :edit_absence     # お休み変更ページ
+        patch :update_absence # お休み更新アクション
+        delete :destroy       # 削除アクション
+      end
+    end
 
     get '/calender/index' => "calendar#index"
 
-    resources :child, only: [ :new, :edit, :update, :create ]
+    resources :child, only: [:new, :edit, :update, :create]
 
-    get '/customers/show' => "customers#show"
+    # マイページのルートに名前付きルートを追加
+    get '/customers/show' => "customers#show", as: 'customers_show'
     get '/customers/information/edit' => "customers#edit"
     patch '/customers/information' => "customers#update"
     get 'customers/unsubscribe' => "customers#unsubscribe"
     patch 'customers/withdrawal' => "customers#withdrawal"
     get '/about' => "homes#about"
 
-    resources :items, only: [ :index, :show ]
+    resources :items, only: [:index, :show]
   end
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
