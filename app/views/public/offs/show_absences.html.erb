@@ -6,22 +6,22 @@
   <% @offs.each do |off| %>
     <li>
       <% begin %>
-        <% # Date.newの生成時にエラーチェックを行う %>
         <% date = Date.new(Date.today.year, off.off_month, off.off_day) %>
-        <%= date.strftime("%m月 %d日") %> <!-- 日付を「11月07日」のように表示 -->
+        <%= date.strftime("%m月 %d日") %>  <!-- 日付を「11月20日」のように表示 -->
 
-        <% if Date.today < date %>
-          <!-- 変更ボタン -->
+        <% if Transfer.exists?(off_id: off.id) %>
+          <!-- 振替済み -->
+          <span class="badge badge-success">振替済み</span>
+        <% else %>
+          <!-- 振替未済の時のみ、変更と削除ボタンを表示 -->
           <%= link_to '変更する', edit_absence_off_path(off), class: "btn btn-sm btn-warning" %>
-          <!-- 削除ボタン -->
           <%= link_to '削除', off_path(off), method: :delete, data: { confirm: "本当にこのお休みをキャンセルしますか？" }, class: "btn btn-sm btn-danger" %>
         <% end %>
-      <% rescue ArgumentError => e %>
+      <% rescue Date::Error => e %>
         <p>無効な日付: 月=<%= off.off_month %>, 日=<%= off.off_day %> (エラー: <%= e.message %>)</p>
       <% end %>
     </li>
   <% end %>
 </ul>
-
 
 <%= link_to '戻る', customers_show_path %>

@@ -1,2 +1,31 @@
-<h1>Public::Date#new</h1>
-<p>Find me in app/views/public/date/new.html.erb</p>
+<div class="container"> 
+  <h1>振替完了致しました。</h1>
+
+  <p>振替日は振替履歴から参照できます。</p>
+  
+  <!-- 振替内容の表示 -->
+  <table class="table">
+    <thead>
+      <tr>
+        <th>名前</th>
+        <th>振替月</th>
+        <th>振替日</th>
+        <th>振替曜日</th>
+        <th>振替時間</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><%= @transfer.child.last_name %> <%= @transfer.child.first_name %></td>
+        <td><%= @transfer.transfer_date.strftime("%m") %>月</td>
+        <td><%= @transfer.transfer_date.strftime("%d") %>日</td>
+        <td><%= @transfer.contact_dey %></td>
+        <td><%= @transfer.transfer_time %></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <%= link_to '振替履歴へ', dates_confirmation_path, class: "btn btn-primary" %>
+
+  <p>お間違えの無いようお越しください。</p>
+</div>

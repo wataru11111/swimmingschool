@@ -1,35 +1,30 @@
 <div class="container">
- <h2>振替日確定</h2>
- <h4>振替日確定致しました。</h4>
- <h4>ご登録ありがとうございました。</h4>
+  <h2>振替日確定</h2>
+  <p>振替日確定致しました。</p>
+  <p>ご登録ありがとうございました。</p>
 
- <table class="table">
-  <thead>
-   <tr>
-    <th>お休み日</th>
-    <th>振替日</th>
-    <th>振替時間</th>
-    <th>クラス</th>
-   </tr>
-  </thead>
-
-  <%# @dates.each do |date| %>
-  <tbody>
-   <tr>
-    <td>
-      <%= @dates.off.off_day %>
-    </td>
-    <td>
-      <%= @dates.transfer_date %>
-    </td>
-    <td>
-      <%= @dates.transfer_time %>
-    </td>
-    <td>
-      <%= @dates.level %>
-    </td>
-   </tr>
-  </tbody>
-  <%# end %>
- </table>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>お休み日</th>
+        <th>振替日</th>
+        <th>振替時間</th>
+        <th>クラス</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          <% if @dates.off.present? %>
+            <%= Date.new(Date.today.year, @dates.off.off_month, @dates.off.off_day).strftime("%Y-%m-%d") %>
+          <% else %>
+            データが見つかりません
+          <% end %>
+        </td>
+        <td><%= @dates.transfer_date.strftime("%Y-%m-%d") if @dates.transfer_date %></td>
+        <td><%= @dates.transfer_time %></td>
+        <td><%= @dates.level %></td>
+      </tr>
+    </tbody>
+  </table>
 </div>

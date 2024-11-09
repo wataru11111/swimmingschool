@@ -9,18 +9,21 @@ module Public
     def create
       @off = Off.new(off_params)
       child = current_customer.children.find_by("first_name = ? AND last_name = ?", params[:off][:child_first_name], params[:off][:child_last_name])
-
+    
       if child
         @off.child_id = child.id
         @off.level = child.level
         @off.flag = 0
         @off.contact_time = child.contact_time
         @off.contact_dey = child.contact_dey
-        @off.last_name = params[:off][:child_last_name]       # last_nameにchild_last_nameの値を設定
-        @off.first_name = params[:off][:child_first_name]     # first_nameにchild_first_nameの値を設定
-
+        @off.last_name = params[:off][:child_last_name]
+        @off.first_name = params[:off][:child_first_name]
+    
+        # `off_month`と`off_day`をセット
+        @off.off_month = params[:off][:off_month].to_i
+        @off.off_day = params[:off][:off_day].to_i
+    
         if @off.save
-          # new.html.erbにリダイレクトせず、そのまま@offデータを表示
           render :new
         else
           render :new
@@ -30,6 +33,8 @@ module Public
         render :new
       end
     end
+    
+    
 
     def index
       @offs = Off.all

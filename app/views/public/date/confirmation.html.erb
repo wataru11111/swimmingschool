@@ -1,33 +1,30 @@
 <div class="container">
- <h2>振替日履歴</h2>
+  <h2>振替日履歴</h2>
 
- <table class="table">
-  <thead>
-   <tr>
-    <th>お休み日</th>
-    <th>振替日</th>
-    <th>振替時間</th>
-    <th>クラス</th>
-   </tr>
-  </thead>
-
-  <% @dates.each do |date| %>
-  <tbody>
-   <tr>
-    <td>
-      <%= date.off.off_day %>
-    </td>
-    <td>
-      <%= date.transfer_date %>
-    </td>
-    <td>
-      <%= date.transfer_time %>
-    </td>
-    <td>
-      <%= date.level %>
-    </td>
-   </tr>
-  </tbody>
-  <% end %>
- </table>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>お休み日</th>
+        <th>振替日</th>
+        <th>振替時間</th>
+        <th>クラス</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @dates.each do |date| %>
+        <tr>
+          <td>
+            <% if date.off.present? %>
+              <%= Date.new(Date.today.year, date.off.off_month, date.off.off_day).strftime("%Y-%m-%d") %>
+            <% else %>
+              データが見つかりません
+            <% end %>
+          </td>
+          <td><%= date.transfer_date.strftime("%Y-%m-%d") if date.transfer_date %></td>
+          <td><%= date.transfer_time %></td>
+          <td><%= date.level %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 </div>
