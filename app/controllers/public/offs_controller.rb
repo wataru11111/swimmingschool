@@ -1,15 +1,22 @@
 # app/controllers/public/offs_controller.rb
 module Public
   class OffsController < ApplicationController
-
     def new
       @off = Off.new
     end
 
     def create
+      # 当日の10時までしか登録できない制限
+      selected_date = Date.new(Date.today.year, params[:off][:off_month].to_i, params[:off][:off_day].to_i)
+      if selected_date < Date.today || (selected_date == Date.today && Time.now >= Time.parse("10:00"))
+        flash[:alert] = "日にちが過ぎている又は当日の10時を過ぎているため登録できません。\nお問い合わせしたい方は080-5011-9947までご連絡ください。"
+        redirect_to offs_path
+        return
+      end
+
       @off = Off.new(off_params)
       child = current_customer.children.find_by("first_name = ? AND last_name = ?", params[:off][:child_first_name], params[:off][:child_last_name])
-    
+
       if child
         @off.child_id = child.id
         @off.level = child.level
@@ -18,11 +25,11 @@ module Public
         @off.contact_dey = child.contact_dey
         @off.last_name = params[:off][:child_last_name]
         @off.first_name = params[:off][:child_first_name]
-    
+
         # `off_month`と`off_day`をセット
         @off.off_month = params[:off][:off_month].to_i
         @off.off_day = params[:off][:off_day].to_i
-    
+
         if @off.save
           render :new
         else
@@ -33,8 +40,6 @@ module Public
         render :new
       end
     end
-    
-    
 
     def index
       @offs = Off.all
@@ -43,14 +48,14 @@ module Public
     # お休み確認ページ
     def show_absences
       @child = Child.find(params[:id])           # 特定の子供の情報を取得
-      @offs = Off.where(child_id: @child.id)           # 子供のお休み情報を取得
+      @offs = Off.where(child_id: @child.id)     # 子供のお休み情報を取得
     end
 
     # お休み変更ページ
     def edit_absence
-      @off = Off.find(params[:id]) 
-       # `off_month`と`off_day`を使って、仮の日付（今年の年で設定）を設定
-  @off_date = Date.new(Date.today.year, @off.off_month, @off.off_day)                 # 特定のお休みを取得
+      @off = Off.find(params[:id])
+      # `off_month`と`off_day`を使って、仮の日付（今年の年で設定）を設定
+      @off_date = Date.new(Date.today.year, @off.off_month, @off.off_day)  # 特定のお休みを取得
     end
 
     def destroy
@@ -62,10 +67,10 @@ module Public
     # お休み変更の更新アクション
     def update_absence
       @off = Off.find(params[:id])
-    
+
       # 選択された日付が今日以降であることを確認
       selected_date = Date.new(Date.today.year, params[:off][:off_month].to_i, params[:off][:off_day].to_i)
-      
+
       if selected_date < Date.today
         flash[:alert] = "過去の日付には変更できません。"
         render :edit_absence

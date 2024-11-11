@@ -1,3 +1,23 @@
 // Place all the styles related to the public/customers controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+
+.large-link {
+    text-align: center;
+    margin: 20px 0;
+  }
+  
+  .btn-large {
+    font-size: 1.5rem;
+    padding: 15px 30px;
+    background-color: #ff6347; /* お好みの背景色 */
+    color: #fff;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: bold;
+  }
+  
+  .btn-large:hover {
+    background-color: #e5533d; /* ホバー時の色 */
+  }
+  

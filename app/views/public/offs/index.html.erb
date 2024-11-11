@@ -1,9 +1,16 @@
 <div id='calendar'></div>
 
 <div class="container">
-<%= form_with model: @offs,url:offs_path, method: :post do |f| %>
+  <!-- フラッシュメッセージの表示 -->
+  <% if flash[:alert] %>
+    <div class="alert alert-danger">
+      <%= flash[:alert] %>
+    </div>
+  <% end %>
 
-<!-- お子さんの姓（last_name）の入力フィールド -->
+  <%= form_with model: @offs, url: offs_path, method: :post do |f| %>
+
+    <!-- お子さんの姓（last_name）の入力フィールド -->
     <div class="field">
       <%= f.label :お子さんの姓 %><br />
       <%= f.text_field :child_last_name %>
@@ -15,21 +22,21 @@
       <%= f.text_field :child_first_name %>
     </div>
 
-<div class="field">
-  <%= f.label :お休み月 %><br />
-  <%= f.select :off_month, (1..12).map { |m| [m, m] }, include_blank: "月選択" %>
-</div>
+    <div class="field">
+      <%= f.label :お休み月 %><br />
+      <%= f.select :off_month, (1..12).map { |m| [m, m] }, include_blank: "月選択" %>
+    </div>
 
-<div class="field">
-  <%= f.label :お休み日 %><br />
-  <%= f.select :off_day, (1..31).map { |d| [d, d] }, include_blank: "日選択" %>
-</div>
+    <div class="field">
+      <%= f.label :お休み日 %><br />
+      <%= f.select :off_day, (1..31).map { |d| [d, d] }, include_blank: "日選択" %>
+    </div>
 
-  <div class=row>
-   <div class="actions"><br>
-  <%= f.submit "保存" %>
-  </div>
-</div>
+    <div class="row">
+      <div class="actions"><br>
+        <%= f.submit "保存" %>
+      </div>
+    </div>
 
-<% end %>
+  <% end %>
 </div>

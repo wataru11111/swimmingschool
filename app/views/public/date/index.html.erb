@@ -1,22 +1,29 @@
 <div id='calendar'></div>
 <div class="container">
 
-  <P class="fc-day-sun">日曜日</P>
-  <P>12:00〜13:00     2歳カニ〜青星4</P>
-  <P>13:00〜14:00     3歳カニ〜ピンク</P>
-  <P>14:00〜15:00     黄星2〜ピンク</P>
-  <P>17:00〜18:00     3歳カニ〜ピンク</P>
+  <p class="fc-day-sun">日曜日</p>
+  <p>12:00〜13:00     2歳カニ〜青星4</p>
+  <p>13:00〜14:00     3歳カニ〜ピンク</p>
+  <p>14:00〜15:00     黄星2〜ピンク</p>
+  <p>17:00〜18:00     3歳カニ〜ピンク</p>
   <br />
 
-  <P class="fc-day-sat">土曜日</P>
-  <P>16:00〜17:00     3歳カニ〜ピンク</P>
-  <P>17:00〜18:00     イルカ〜ピンク</P>
-  <P>18:00〜19:00     小学生</P>
+  <p class="fc-day-sat">土曜日</p>
+  <p>16:00〜17:00     3歳カニ〜ピンク</p>
+  <p>17:00〜18:00     イルカ〜ピンク</p>
+  <p>18:00〜19:00     小学生</p>
 </div>
+
+<!-- フラッシュメッセージの表示 -->
+<% if flash[:alert] %>
+  <div class="alert alert-danger">
+    <%= flash[:alert] %>
+  </div>
+<% end %>
 
 <%= form_with model: @date, url: date_index_path, method: :post do |f| %>
 
-<h3>振り替え入力欄</h3>
+  <h3>振り替え入力欄</h3>
   <div class="field">
     <%= f.label :last_name, "苗字", for: "last_name" %><br />
     <%= f.text_field :last_name, id: "last_name" %>
@@ -38,8 +45,8 @@
   </div>
 
   <div class="field">
-  <%= f.label :level, "クラス", for: "level" %><br />
-  <%= f.select :level, [
+    <%= f.label :level, "クラス", for: "level" %><br />
+    <%= f.select :level, [
       ["カニ", "カニ"],
       ["ラッコ", "ラッコ"],
       ["イルカ", "イルカ"],
@@ -48,11 +55,11 @@
       ["赤星1", "赤星1"], ["赤星2", "赤星2"], ["赤星3", "赤星3"], ["赤星4", "赤星4"],
       ["ピンク星1", "ピンク星1"], ["ピンク星2", "ピンク星2"], ["ピンク星3", "ピンク星3"], ["ピンク星4", "ピンク星4"]
     ], { include_blank: "クラス選択" }, { id: "level" } %>
-</div>
+  </div>
 
   <div class="field">
     <%= f.label :contact_dey, "振替曜日", for: "contact_dey" %><br />
-    <%= f.select :contact_dey, [["土曜日", "土曜日"], ["日曜日", "日曜日"]], { include_blank: "曜日選択" }, { id: "contact_dey" } %>
+    <%= f.select :contact_dey, [["土曜日", "土曜日"], ["日曜日", "日曜日"]], { include_blank: "曜日選択" }, { id: "contact_dey", onchange: "updateContactTimeOptions()" } %>
   </div>
 
   <div class="field">
@@ -76,31 +83,34 @@
 <% end %>
 
 <%= javascript_tag do %>
-  document.addEventListener('DOMContentLoaded', function() {
+  function updateContactTimeOptions() {
     const contactDeySelect = document.getElementById('contact_dey');
     const contactTimeSelect = document.getElementById('contact_time');
 
-    contactDeySelect.addEventListener('change', function() {
-      const day = contactDeySelect.value;
+    const day = contactDeySelect.value;
 
-      // 時間オプションをクリア
-      contactTimeSelect.innerHTML = '';
+    // 時間オプションをクリア
+    contactTimeSelect.innerHTML = '';
 
-      let timeOptions = [];
+    let timeOptions = [];
 
-      if (day === '日曜日') {
-        timeOptions = [["12:00", "12:00"], ["13:00", "13:00"], ["14:00", "14:00"], ["17:00", "17:00"]];
-      } else if (day === '土曜日') {
-        timeOptions = [["16:00", "16:00"], ["17:00", "17:00"], ["18:00", "18:00"]];
-      }
+    if (day === '日曜日') {
+      timeOptions = [["12:00", "12:00"], ["13:00", "13:00"], ["14:00", "14:00"], ["17:00", "17:00"]];
+    } else if (day === '土曜日') {
+      timeOptions = [["16:00", "16:00"], ["17:00", "17:00"], ["18:00", "18:00"]];
+    }
 
-      // オプションを追加
-      timeOptions.forEach(function(option) {
-        const opt = document.createElement('option');
-        opt.value = option[0];
-        opt.textContent = option[1];
-        contactTimeSelect.appendChild(opt);
-      });
+    // オプションを追加
+    timeOptions.forEach(function(option) {
+      const opt = document.createElement('option');
+      opt.value = option[0];
+      opt.textContent = option[1];
+      contactTimeSelect.appendChild(opt);
     });
-  });
+  }
+
+  // ページ読み込み時に時間オプションを設定
+  window.onload = function() {
+    updateContactTimeOptions();
+  };
 <% end %>

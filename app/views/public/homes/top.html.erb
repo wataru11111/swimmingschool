@@ -1,11 +1,83 @@
 <div class="container">
-    <h1>JSC</h1>
+  <style>
+    .top-page {
+      background-image: url(<%= asset_path '水の中.webp' %>);
+      background-size: cover;
+      background-position: center;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      text-align: center;
+    }
 
-    <%#画像をつける%>
+    .main-title {
+      font-size: 3rem;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+      opacity: 0;
+      animation: fadeInUp 2s ease-in-out forwards;
+    }
 
-    <%#お知らせ通知%>
+    .login-register-links {
+      margin-top: 20px;
+      display: flex;
+      gap: 20px;
+      opacity: 0;
+      animation: fadeIn 3s ease-in-out forwards;
+    }
 
-    <%= link_to '入会・体験についてはこちら', about_path, class: "btn btn-sm btn-danger" %><br />
-<br />
-    <%= link_to 'スケジュール表', calender_index_path, class: "btn btn-sm btn-danger" %><br />
-<br />
+    .login-register-links a {
+      color: white;
+      font-size: 1.2rem;
+      text-decoration: none;
+      padding: 10px 20px;
+      border: 1px solid white;
+      border-radius: 5px;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    .login-register-links a:hover {
+      background-color: white;
+      color: #000;
+    }
+
+    @keyframes fadeInUp {
+      0% {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeIn {
+      0% {
+        opacity: 0;
+      }
+      100% {
+        opacity: 1;
+      }
+    }
+  </style>
+
+  <!-- トップページのコンテンツ -->
+  <div class="top-page">
+    <h1 class="main-title">スイミングスクール</h1>
+
+    <!-- ログインと新規登録リンク -->
+    <div class="login-register-links">
+      <%= link_to 'ログイン', new_customer_session_path, class: "btn btn-login" %>
+      <%= link_to '新規登録', new_customer_registration_path, class: "btn btn-register" %>
+    </div>
+  </div>
+
+  <!-- 他のリンク -->
+  <%= link_to '入会・体験についてはこちら', about_path, class: "btn btn-sm btn-danger" %><br />
+  <br />
+  <%= link_to 'スケジュール表', calender_index_path, class: "btn btn-sm btn-danger" %><br />
+  <br />
+</div>

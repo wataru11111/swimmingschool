@@ -4,10 +4,26 @@ class Public::DateController < ApplicationController
   end
 
   def create
+    # 当日の10時までしか登録できない制限
+    begin
+      transfer_month = params[:transfer][:transfer_month].to_i
+      transfer_day = params[:transfer][:transfer_day].to_i
+      selected_date = Date.new(Date.today.year, transfer_month, transfer_day)
+      
+      if selected_date < Date.today || (selected_date == Date.today && Time.now >= Time.parse("10:00"))
+        flash[:alert] = "お休み登録がされていないか、日にちが過ぎている又は当日の10時を過ぎているため登録できません。\nお問い合わせしたい方は080-5011-9947までご連絡ください。"
+        redirect_to date_index_path
+        return
+      end
+    rescue ArgumentError
+      flash[:alert] = "無効な振替日が選択されました。"
+      return render :new
+    end
+
     @transfer = Transfer.new(transfer_params)
     
     # お子さんをfirst_nameとlast_nameで検索
-    child = current_customer.child.find_by(
+    child = current_customer.children.find_by(
       first_name: params[:transfer][:first_name],
       last_name: params[:transfer][:last_name]
     )
@@ -15,16 +31,7 @@ class Public::DateController < ApplicationController
     if child.present?
       @transfer.child_id = child.id
       @transfer.transfer_time = params[:transfer][:contact_time] # contact_timeをtransfer_timeに設定
-
-      # 振替月と振替日から振替日付を作成
-      begin
-        transfer_month = params[:transfer][:transfer_month].to_i
-        transfer_day = params[:transfer][:transfer_day].to_i
-        @transfer.transfer_date = Date.new(Date.today.year, transfer_month, transfer_day)
-      rescue ArgumentError
-        flash[:alert] = "無効な振替日が選択されました。"
-        return render :new
-      end
+      @transfer.transfer_date = selected_date
 
       # お休みデータを取得してflagを更新
       off = child.offs.where(flag: 0).last
@@ -51,7 +58,8 @@ class Public::DateController < ApplicationController
   end
 
   def confirmation
-    @dates = Transfer.all
+    # 現在の会員の子どもに関連する振替データのみを取得
+    @dates = Transfer.joins(:child).where(children: { customer_id: current_customer.id })
   end
 
   def completion
