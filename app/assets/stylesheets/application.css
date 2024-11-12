@@ -13,3 +13,12 @@
  *= require_tree .
  *= require_self
  */
+
+/* home以外のページに背景画像を適用するクラス */
+.custom-background header {
+    background-image: url('/assets/綺麗な背景.webp');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}

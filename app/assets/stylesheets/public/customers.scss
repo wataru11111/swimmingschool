@@ -3,21 +3,94 @@
 // You can use Sass (SCSS) here: https://sass-lang.com/
 
 .large-link {
-    text-align: center;
-    margin: 20px 0;
-  }
-  
-  .btn-large {
-    font-size: 1.5rem;
-    padding: 15px 30px;
-    background-color: #ff6347; /* お好みの背景色 */
-    color: #fff;
-    text-decoration: none;
-    border-radius: 8px;
-    font-weight: bold;
-  }
-  
-  .btn-large:hover {
-    background-color: #e5533d; /* ホバー時の色 */
-  }
-  
+  text-align: center;
+  margin: 20px 0;
+}
+
+.btn-large {
+  font-size: 1.5rem;
+  padding: 15px 30px;
+  background-color: #ff6347; /* お好みの背景色 */
+  color: #fff;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: bold;
+}
+
+.btn-large:hover {
+  background-color: #e5533d; /* ホバー時の色 */
+}
+
+/* 編集ボタン */
+.btn-edit {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 1rem;
+  color: white;
+  background: linear-gradient(135deg, #3a7bd5, #00d2ff);
+  border-radius: 5px;
+  text-align: center;
+  text-decoration: none;
+}
+
+/* お子さん登録ボタン */
+.btn-register {
+  display: inline-block;
+  padding: 15px 30px;
+  font-size: 1.5rem;
+  color: white;
+  background: linear-gradient(135deg, #3a7bd5, #00d2ff);
+  border-radius: 5px;
+  text-align: center;
+  text-decoration: none;
+}
+
+/* お休み登録ボタン - ピンク系 */
+.btn-holiday {
+  display: block;
+  padding: 10px 20px;
+  font-size: 1rem;
+  color: white;
+  background: linear-gradient(135deg, #FFB6C1, #FF69B4);
+  border-radius: 5px;
+  text-align: center;
+  text-decoration: none;
+  margin-bottom: 10px;
+}
+
+/* 振替日登録ボタン - ブルー系 */
+.btn-transfer {
+  display: block;
+  padding: 10px 20px;
+  font-size: 1rem;
+  color: white;
+  background: linear-gradient(135deg, #87CEFA, #00BFFF);
+  border-radius: 5px;
+  text-align: center;
+  text-decoration: none;
+  margin-bottom: 10px;
+}
+
+/* 振替履歴ボタン - グリーン系 */
+.btn-history {
+  display: block;
+  padding: 10px 20px;
+  font-size: 1rem;
+  color: white;
+  background: linear-gradient(135deg, #98FB98, #00FA9A);
+  border-radius: 5px;
+  text-align: center;
+  text-decoration: none;
+}
+
+/* お休みを確認ボタン */
+.btn-confirm {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 1rem;
+  color: white;
+  background: linear-gradient(135deg, #3a7bd5, #00d2ff);
+  border-radius: 5px;
+  text-align: center;
+  text-decoration: none;
+}

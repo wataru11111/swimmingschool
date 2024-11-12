@@ -1,20 +1,119 @@
-// Place all the styles related to the public/homes controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: https://sass-lang.com/
+/* HTMLとbody全体に背景を設定 */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden; /* 水平方向のスクロールを防止 */
+}
 
-.top-page {
-    background-image: url('../../images/水の中.webp');
-    background-size: cover;
-    background-position: center;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: white;
+/* トップページのヘッダーのスタイル */
+.top-page-background header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 10;
+}
+
+
+/* 背景とトップページのスタイル */
+.top-page-background {
+  background-image: url('/assets/水の中.webp');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: white;
+}
+
+
+/* タイトルのスタイル */
+.main-title {
+  font-size: 3rem;
+  margin-bottom: 20px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+  opacity: 0;
+  animation: fadeInUp 2s ease-in-out forwards;
+}
+
+/* ログイン・新規登録リンクのスタイル */
+.login-register-links {
+  margin-top: 20px;
+  display: flex;
+  gap: 20px;
+  opacity: 0;
+  animation: fadeIn 3s ease-in-out forwards;
+  justify-content: center;
+}
+
+.login-register-links a {
+  color: white;
+  font-size: 1.2rem;
+  text-decoration: none;
+  padding: 10px 20px;
+  border: 1px solid white;
+  border-radius: 5px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.login-register-links a:hover {
+  background-color: white;
+  color: #000;
+}
+
+/* 下部の追加リンクスタイル */
+.additional-links {
+  margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+  opacity: 0;
+  animation: fadeIn 4s ease-in-out forwards;
+}
+
+.additional-links a {
+  color: white;
+  font-size: 1rem;
+  text-decoration: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  background: linear-gradient(135deg, #ff7e5f, #feb47b);
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s, color 0.3s, transform 0.3s;
+}
+
+.additional-links a:hover {
+  background: linear-gradient(135deg, #feb47b, #ff7e5f);
+  color: #fff;
+  transform: scale(1.05);
+}
+
+/* タイトルの浮き出しアニメーション */
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
   }
-  
-  .main-title {
-    font-size: 3rem;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+  100% {
+    opacity: 1;
+    transform: translateY(0);
   }
-  
+}
+
+/* その他要素のフェードイン */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+

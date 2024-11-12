@@ -3,9 +3,8 @@
   <h2>登録情報</h2>
 
   <!-- "編集する"ボタン -->
-  <div style="margin-bottom: 15px;">
-    <%= link_to '編集する', customers_information_edit_path, style: "display: inline-block; padding: 10px 20px; font-size: 1rem; color: white; background: linear-gradient(135deg, #3a7bd5, #00d2ff); border-radius: 5px; text-align: center; text-decoration: none;" %>
-  </div>
+<%= link_to '編集する', customers_information_edit_path, class: "btn-edit" %>
+
 
   <table class="table">
     <thead>
@@ -33,7 +32,7 @@
   <% @children.each do |child| %>
     <h2>お子さん情報</h2>
     <div style="margin-bottom: 15px;">
-      <%= link_to '編集する', edit_child_path(child), style: "display: inline-block; padding: 10px 20px; font-size: 1rem; color: white; background: linear-gradient(135deg, #3a7bd5, #00d2ff); border-radius: 5px; text-align: center; text-decoration: none;" %>
+      <%= link_to '編集する', edit_child_path(child), class: "btn-edit" %>
     </div>
 
     <table class="table">
@@ -57,7 +56,7 @@
           <td><%= child.contact_dey %></td>
           <td>
             <%= Off.where(child_id: child.id, flag: 0).count %>日
-            <%= link_to 'お休みを確認', show_absences_off_path(id: child.id), style: "display: inline-block; padding: 10px 20px; font-size: 1rem; color: white; background: linear-gradient(135deg, #3a7bd5, #00d2ff); border-radius: 5px; text-align: center; text-decoration: none;" %>
+            <%= link_to 'お休みを確認', show_absences_off_path(id: child.id), class: "btn-confirm" %>
           </td>
         </tr>
       </tbody>
@@ -66,13 +65,13 @@
 
   <!-- お子さん登録ボタンをお子さん情報の下に移動 -->
   <div style="text-align: center; margin: 20px 0;">
-    <%= link_to 'お子さん登録', new_child_path, style: "display: inline-block; padding: 15px 30px; font-size: 1.5rem; color: white; background: linear-gradient(135deg, #3a7bd5, #00d2ff); border-radius: 5px; text-align: center; text-decoration: none;" %>
+    <%= link_to 'お子さん登録', new_child_path, class: "btn-register" %>
   </div>
 
   <!-- 他のボタン -->
   <div style="margin-top: 20px;">
-    <%= link_to 'お休み登録', offs_path, style: "display: block; padding: 10px 20px; font-size: 1rem; color: white; background: linear-gradient(135deg, #3a7bd5, #00d2ff); border-radius: 5px; text-align: center; text-decoration: none; margin-bottom: 10px;" %>
-    <%= link_to '振替日登録', date_index_path, style: "display: block; padding: 10px 20px; font-size: 1rem; color: white; background: linear-gradient(135deg, #3a7bd5, #00d2ff); border-radius: 5px; text-align: center; text-decoration: none; margin-bottom: 10px;" %>
-    <%= link_to '振替 履歴', dates_confirmation_path, style: "display: block; padding: 10px 20px; font-size: 1rem; color: white; background: linear-gradient(135deg, #3a7bd5, #00d2ff); border-radius: 5px; text-align: center; text-decoration: none;" %>
+    <%= link_to 'お休み登録', offs_path, class: "btn-holiday" %>
+    <%= link_to '振替日登録', date_index_path, class: "btn-transfer" %>
+    <%= link_to '振替 履歴', dates_confirmation_path, class: "btn-history" %>
   </div>
 </div>

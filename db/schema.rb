@@ -60,7 +60,7 @@ ActiveRecord::Schema.define(version: 2023_07_26_075636) do
 
   create_table "offs", force: :cascade do |t|
     t.integer "child_id", null: false
-    t.date "off_month", null: false
+    t.integer "off_month", null: false
     t.date "off_day", null: false
     t.string "level", null: false
     t.string "flag", null: false
