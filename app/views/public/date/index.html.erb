@@ -47,9 +47,7 @@
   <div class="field">
     <%= f.label :level, "クラス", for: "level" %><br />
     <%= f.select :level, [
-      ["カニ", "カニ"],
-      ["ラッコ", "ラッコ"],
-      ["イルカ", "イルカ"],
+      ["カニ", "カニ"], ["ラッコ", "ラッコ"], ["イルカ", "イルカ"],
       ["黄星1", "黄星1"], ["黄星2", "黄星2"], ["黄星3", "黄星3"], ["黄星4", "黄星4"],
       ["青星1", "青星1"], ["青星2", "青星2"], ["青星3", "青星3"], ["青星4", "青星4"],
       ["赤星1", "赤星1"], ["赤星2", "赤星2"], ["赤星3", "赤星3"], ["赤星4", "赤星4"],
@@ -59,7 +57,7 @@
 
   <div class="field">
     <%= f.label :contact_dey, "振替曜日", for: "contact_dey" %><br />
-    <%= f.select :contact_dey, [["土曜日", "土曜日"], ["日曜日", "日曜日"]], { include_blank: "曜日選択" }, { id: "contact_dey", onchange: "updateContactTimeOptions()" } %>
+    <%= f.select :contact_dey, [["土曜日", "土曜日"], ["日曜日", "日曜日"]], { include_blank: "曜日選択" }, { id: "contact_dey" } %>
   </div>
 
   <div class="field">
@@ -80,37 +78,4 @@
     </div>
   </div>
 
-<% end %>
-
-<%= javascript_tag do %>
-  function updateContactTimeOptions() {
-    const contactDeySelect = document.getElementById('contact_dey');
-    const contactTimeSelect = document.getElementById('contact_time');
-
-    const day = contactDeySelect.value;
-
-    // 時間オプションをクリア
-    contactTimeSelect.innerHTML = '';
-
-    let timeOptions = [];
-
-    if (day === '日曜日') {
-      timeOptions = [["12:00", "12:00"], ["13:00", "13:00"], ["14:00", "14:00"], ["17:00", "17:00"]];
-    } else if (day === '土曜日') {
-      timeOptions = [["16:00", "16:00"], ["17:00", "17:00"], ["18:00", "18:00"]];
-    }
-
-    // オプションを追加
-    timeOptions.forEach(function(option) {
-      const opt = document.createElement('option');
-      opt.value = option[0];
-      opt.textContent = option[1];
-      contactTimeSelect.appendChild(opt);
-    });
-  }
-
-  // ページ読み込み時に時間オプションを設定
-  window.onload = function() {
-    updateContactTimeOptions();
-  };
 <% end %>

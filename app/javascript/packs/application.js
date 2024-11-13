@@ -15,6 +15,8 @@ import "popper.js";
 import "bootstrap";
 import "../stylesheets/application";
 import "../custom/date_form";// ここでカスタムスクリプトをインポートする
+import "../custom/child_form"; // 上記JSファイルのパスに合わせて変更
+import "../custom/child_edit_form";
 
 Rails.start()
 Turbolinks.start()

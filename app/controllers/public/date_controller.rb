@@ -12,12 +12,11 @@ class Public::DateController < ApplicationController
       
       if selected_date < Date.today || (selected_date == Date.today && Time.now >= Time.parse("10:00"))
         flash[:alert] = "お休み登録がされていないか、日にちが過ぎている又は当日の10時を過ぎているため登録できません。\nお問い合わせしたい方は080-5011-9947までご連絡ください。"
-        redirect_to date_index_path
-        return
+        redirect_to date_index_path and return
       end
     rescue ArgumentError
       flash[:alert] = "無効な振替日が選択されました。"
-      return render :new
+      render :new and return
     end
 
     @transfer = Transfer.new(transfer_params)
@@ -28,28 +27,29 @@ class Public::DateController < ApplicationController
       last_name: params[:transfer][:last_name]
     )
     
-    if child.present?
-      @transfer.child_id = child.id
-      @transfer.transfer_time = params[:transfer][:contact_time] # contact_timeをtransfer_timeに設定
-      @transfer.transfer_date = selected_date
-
-      # お休みデータを取得してflagを更新
-      off = child.offs.where(flag: 0).last
-      if off.present?
-        @transfer.off_id = off.id
-        if @transfer.save!
-          off.update(flag: 1)
-          redirect_to dates_completion_path(id: @transfer.id)
-        else
-          render :index
-        end
-      else
-        flash[:alert] = "対象のお休みが見つかりませんでした。"
-        render :new
-      end
-    else
+    unless child
       flash[:alert] = "指定されたお子さんが見つかりませんでした。"
-      render :new
+      render :new and return
+    end
+
+    @transfer.child_id = child.id
+    @transfer.transfer_time = params[:transfer][:contact_time] # contact_timeをtransfer_timeに設定
+    @transfer.transfer_date = selected_date
+
+    # お休みデータを取得して日付順に並べ、最も早い日を使用
+    off = child.offs.where(flag: 0).order(:date).first # 最も早い日付の休みを取得
+    unless off
+      flash[:alert] = "振替に必要なお休みが見つかりませんでした。"
+      redirect_to date_index_path and return
+    end
+
+    @transfer.off_id = off.id
+    if @transfer.save
+      off.update(flag: 1) # 振替が完了したらフラグを更新
+      redirect_to dates_completion_path(id: @transfer.id) and return
+    else
+      flash[:alert] = "振替の登録に失敗しました。もう一度お試しください。"
+      render :new and return
     end
   end
 

@@ -1,7 +1,7 @@
 <div class="container">
   <h2>お子さん情報編集</h2>
 
-<%= form_with model: @child,url:child_path, method: :patch do |f| %>
+  <%= form_with model: @child, url: child_path, method: :patch do |f| %>
     <div class="field">
       <%= f.label :姓 %><br />
       <%= f.text_field :last_name, autofocus: true, autocomplete: "last_name" %>
@@ -24,17 +24,23 @@
 
     <div class="field">
       <%= f.label :契約曜日 %><br />
-      <%= f.text_field :contact_dey, autofocus: true, autocomplete: "contact_dey" %>
+      <%= f.select :contact_dey, 
+                   [["水曜日", "水曜日"], ["木曜日", "木曜日"], ["土曜日", "土曜日"], ["日曜日", "日曜日"]], 
+                   { include_blank: "曜日選択", selected: @child.contact_dey }, 
+                   { id: "contact_dey" } %>
     </div>
 
     <div class="field">
       <%= f.label :クラス %><br />
-      <%= f.text_field :level, autofocus: true, autocomplete: "level" %>
+      <%= f.select :level, [["カニ", "カニ"], ["ラッコ", "ラッコ"], ["イルカ", "イルカ"], ["黄星1", "黄星1"], ["黄星2", "黄星2"], ["黄星3", "黄星3"], ["黄星4", "黄星4"], ["青星1", "青星1"], ["青星2", "青星2"], ["青星3", "青星3"], ["青星4", "青星4"], ["赤星1", "赤星1"], ["赤星2", "赤星2"], ["赤星3", "赤星3"], ["赤星4", "赤星4"], ["ピンク星1", "ピンク星1"], ["ピンク星2", "ピンク星2"], ["ピンク星3", "ピンク星3"], ["ピンク星4", "ピンク星4"]], 
+                   { include_blank: "クラス選択" } %>
     </div>
 
     <div class="field">
       <%= f.label :契約時間 %><br />
-      <%= f.text_field :contact_time, autofocus: true, autocomplete: "contact_time" %>
+      <%= f.select :contact_time, [], 
+              { include_blank: "時間選択" }, 
+              { id: "contact_time", "data-current-time": @child.contact_time } %>
     </div>
 
     <div class="field">
@@ -42,11 +48,10 @@
       <%= f.text_field :telephone_number, autofocus: true, autocomplete: "telephone_number" %>
     </div>
 
-      <div class=row>
-       <div class="actions">
-      <%= f.submit "編集内容を保存" %>
+    <div class=row>
+      <div class="actions">
+        <%= f.submit "編集内容を保存" %>
       </div>
     </div>
   <% end %>
-  </div>
 </div>

@@ -1,8 +1,7 @@
 <div class="container">
   <h2>お子さん新規登録</h2>
 
-  <%= form_with model: @child,url:child_index_path do |f| %>
-
+  <%= form_with model: @child, url: child_index_path do |f| %>
     <div class="field">
       <%= f.label :姓 %><br />
       <%= f.text_field :last_name, autofocus: true, autocomplete: "last_name" %>
@@ -12,7 +11,6 @@
       <%= f.label :名 %><br />
       <%= f.text_field :first_name, autofocus: true, autocomplete: "first_name" %>
     </div>
-
 
     <div class="field">
       <%= f.label :姓カナ %><br />
@@ -26,17 +24,22 @@
 
     <div class="field">
       <%= f.label :契約曜日 %><br />
-      <%= f.select :contact_dey, [["水曜日", "水曜日"], ["木曜日", "木曜日"], ["土曜日", "土曜日"], ["日曜日", "日曜日"]], include_blank: "曜日選択" %>
+      <%= f.select :contact_dey, 
+                   [["水曜日", "水曜日"], ["木曜日", "木曜日"], ["土曜日", "土曜日"], ["日曜日", "日曜日"]], 
+                   include_blank: "曜日選択", 
+                   id: "child_contact_dey" %>
     </div>
 
     <div class="field">
       <%= f.label :クラス %><br />
-      <%= f.select :level, [["カニ", "カニ"], ["ラッコ", "ラッコ"], ["イルカ", "イルカ"], ["黄星1", "黄星1"], ["黄星2", "黄星2"], ["黄星3", "黄星3"], ["黄星4", "黄星4"], ["青星1", "青星1"], ["青星2", "青星2"], ["青星3", "青星3"], ["青星4", "青星4"], ["赤星1", "赤星1"], ["赤星2", "赤星2"], ["赤星3", "赤星3"], ["赤星4", "赤星4"], ["ピンク星1", "ピンク星1"], ["ピンク星2", "ピンク星2"], ["ピンク星3", "ピンク星3"], ["ピンク星4", "ピンク星4"]], include_blank: "クラス選択" %>
+      <%= f.select :level, 
+                   [["カニ", "カニ"], ["ラッコ", "ラッコ"], ["イルカ", "イルカ"], ["黄星1", "黄星1"], ["黄星2", "黄星2"], ["黄星3", "黄星3"], ["黄星4", "黄星4"], ["青星1", "青星1"], ["青星2", "青星2"], ["青星3", "青星3"], ["青星4", "青星4"], ["赤星1", "赤星1"], ["赤星2", "赤星2"], ["赤星3", "赤星3"], ["赤星4", "赤星4"], ["ピンク星1", "ピンク星1"], ["ピンク星2", "ピンク星2"], ["ピンク星3", "ピンク星3"], ["ピンク星4", "ピンク星4"]], 
+                   include_blank: "クラス選択" %>
     </div>
 
     <div class="field">
       <%= f.label :契約時間 %><br />
-      <%= f.select :contact_time, [["12:00", "12:00"], ["13:00", "13:00"], ["14:00", "14:00"], ["14:30", "14:30"], ["15:00", "15:00"], ["15:15", "15:15"], ["16:00", "16;00"], ["17:00", "17:00"], ["18:00", "18:00"], ["19:30", "19:30"]], include_blank: "時間選択" %>
+      <%= f.select :contact_time, [], include_blank: "時間選択", id: "child_contact_time" %>
     </div>
 
     <div class="field">
@@ -46,8 +49,6 @@
 
     <div class="actions">
       <%= f.submit "新規登録" %>
-
     </div>
   <% end %>
-
 </div>

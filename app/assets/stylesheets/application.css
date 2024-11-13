@@ -15,7 +15,7 @@
  */
 
 /* home以外のページに背景画像を適用するクラス */
-.custom-background header {
+.custom-background {
     background-image: url('/assets/綺麗な背景.webp');
     background-size: cover;
     background-position: center;
