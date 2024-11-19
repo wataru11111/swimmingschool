@@ -2,9 +2,20 @@
 
 <div class="container">
   <!-- フラッシュメッセージの表示 -->
-  <% if flash[:alert] %>
+  <% if flash[:alert].present? %>
     <div class="alert alert-danger">
       <%= flash[:alert] %>
+    </div>
+  <% end %>
+
+  <% if @off&.errors&.any? %>
+    <div class="error-messages">
+      <h2>登録に失敗しました</h2>
+      <ul>
+        <% @off.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
     </div>
   <% end %>
 
@@ -21,15 +32,10 @@
       <%= f.label :お子さんの名 %><br />
       <%= f.text_field :child_first_name %>
     </div>
-
+    
     <div class="field">
-      <%= f.label :お休み月 %><br />
-      <%= f.select :off_month, (1..12).map { |m| [m, m] }, include_blank: "月選択" %>
-    </div>
-
-    <div class="field">
-      <%= f.label :お休み日 %><br />
-      <%= f.select :off_day, (1..31).map { |d| [d, d] }, include_blank: "日選択" %>
+      <%= f.label :お休み日付 %><br />
+      <%= f.date_select :off_month, include_blank: true %>
     </div>
 
     <div class="row">

@@ -10,7 +10,6 @@ class CreateChildren < ActiveRecord::Migration[6.1]
         t.string "contact_dey",       null: false
         t.string "level",             null: false
         t.string "telephone_number",  null: false
-
       t.timestamps
     end
   end

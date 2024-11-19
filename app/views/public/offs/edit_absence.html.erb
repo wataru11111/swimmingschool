@@ -1,48 +1,37 @@
 <div class="container">
-<h1>お休みの変更</h1>
-<%= form_with model: @off, url: update_absence_off_path(@off), method: :patch, local: true do |f| %>
-  <div>
-    <%= f.label :off_month, "月" %>
-    <%= f.number_field :off_month, value: @off.off_month, in: 1..12, id: "off_month" %> <!-- 1〜12月の範囲で入力 -->
-  </div>
-  <div>
-    <%= f.label :off_day, "日" %>
-    <%= f.number_field :off_day, value: @off.off_day, in: 1..31, id: "off_day" %> <!-- 1〜31日の範囲で入力 -->
-  </div>
-  <div>
-    <%= f.submit "変更を確定", id: "submit_button" %>
-  </div>
-<% end %>
+  <h1>お休みの変更</h1>
+  <%= form_with model: @off, url: update_absence_off_path(@off), method: :patch, local: true do |f| %>
+    <div>
+      <%= f.label :off_month, "お休み日付" %>
+      <%= f.date_field :off_month, value: @off.off_month, id: "off_month" %>
+    </div>
+    <div>
+      <%= f.submit "変更を確定", id: "submit_button" %>
+    </div>
+  <% end %>
 
-<script>
-  document.addEventListener("DOMContentLoaded", function() {
-    const monthField = document.getElementById("off_month");
-    const dayField = document.getElementById("off_day");
-    const submitButton = document.getElementById("submit_button");
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const dateField = document.getElementById("off_month");
+      const submitButton = document.getElementById("submit_button");
 
-    function checkDate() {
-      const month = parseInt(monthField.value);
-      const day = parseInt(dayField.value);
+      function checkDate() {
+        const selectedDate = new Date(dateField.value);
+        const today = new Date();
 
-      // 現在の日付を取得
-      const today = new Date();
-      const currentYear = today.getFullYear();
-      const selectedDate = new Date(currentYear, month - 1, day);
-
-      // 選択された日付が今日より前かどうかをチェック
-      if (selectedDate < today) {
-        submitButton.disabled = true; // ボタンを無効化
-      } else {
-        submitButton.disabled = false; // ボタンを有効化
+        // 現在の日付より前の日付が選択されている場合、ボタンを無効化
+        if (selectedDate < today) {
+          submitButton.disabled = true;
+        } else {
+          submitButton.disabled = false;
+        }
       }
-    }
 
-    // フィールドの変更時にチェックを実行
-    monthField.addEventListener("input", checkDate);
-    dayField.addEventListener("input", checkDate);
+      // 日付フィールドの変更時にチェックを実行
+      dateField.addEventListener("input", checkDate);
 
-    // 初回チェック
-    checkDate();
-  });
-</script>
+      // 初回チェック
+      checkDate();
+    });
+  </script>
 </div>

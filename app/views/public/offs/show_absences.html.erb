@@ -1,3 +1,4 @@
+<!-- app/views/public/offs/show_absences.html.erb -->
 <h1>お休み確認ページ</h1>
 <p>以下の日付でお休みしています:</p>
 <h1><%= @child.last_name %> <%= @child.first_name %>さんのお休み一覧</h1>
@@ -6,19 +7,27 @@
   <% @offs.each do |off| %>
     <li>
       <% begin %>
-        <% date = Date.new(Date.today.year, off.off_month, off.off_day) %>
-        <%= date.strftime("%m月 %d日") %>  <!-- 日付を「11月20日」のように表示 -->
+        <% if off.off_month.present? %>
+          <!-- `off_month` を直接フォーマット -->
+          <%= off.off_month.strftime("%m月 %d日") %> <!-- お休みの日付を表示 -->
 
-        <% if Transfer.exists?(off_id: off.id) %>
-          <!-- 振替済み -->
-          <span class="badge badge-success">振替済み</span>
+          <% if off.transfer_registered? %>
+            <% transfer = off.registered_transfer %>
+            <span class="badge badge-success">
+              振替済み (振替日: <%= transfer.transfer_date.strftime("%m月 %d日") %>)
+            </span>
+          <% else %>
+            <!-- 振替未済の時のみ、変更と削除ボタンを表示 -->
+            <%= link_to '変更する', edit_absence_off_path(off), class: "btn btn-sm btn-warning" %>
+            <%= link_to '削除', off_path(off), method: :delete, data: { confirm: "本当にこのお休みをキャンセルしますか？" }, class: "btn btn-sm btn-danger" %>
+          <% end %>
         <% else %>
-          <!-- 振替未済の時のみ、変更と削除ボタンを表示 -->
-          <%= link_to '変更する', edit_absence_off_path(off), class: "btn btn-sm btn-warning" %>
-          <%= link_to '削除', off_path(off), method: :delete, data: { confirm: "本当にこのお休みをキャンセルしますか？" }, class: "btn btn-sm btn-danger" %>
+          <!-- 日付が欠損している場合のメッセージ -->
+          <span class="text-danger">不明な日付 (off_month: <%= off.off_month.inspect %>)</span>
         <% end %>
-      <% rescue Date::Error => e %>
-        <p>無効な日付: 月=<%= off.off_month %>, 日=<%= off.off_day %> (エラー: <%= e.message %>)</p>
+      <% rescue ArgumentError => e %>
+        <!-- 不正な日付データがあった場合のエラーメッセージ -->
+        <span class="text-danger">不正な日付 (エラー内容: <%= e.message %>)</span>
       <% end %>
     </li>
   <% end %>

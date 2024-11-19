@@ -1,8 +1,8 @@
 <div class="container">
   <h2>振替日履歴</h2>
-
+  <h2 style="color: red; font-weight: bold;">振替日過ぎての変更は出来ません</h2>
   <!-- 振替に関するメッセージ -->
-<p>振替日をお休みしてしまい、振替日を振り替えた場合は<br>こちらの080-5011-9947番号に<br>『お名前』『お休みしてしまった日』『振り替えたい日』『曜日と時間』を<br>記載してSMSメッセージをお願い致します。</p>
+<p>振替日過ぎる前で変更したい場合は<br>こちらの080-5011-9947番号に<br>『お名前』『振替予定だった日にち』『振り替えたい日』『曜日と時間』を<br>記載してSMSメッセージをお願い致します。</p>
 
   <table class="table">
     <thead>
@@ -14,20 +14,22 @@
       </tr>
     </thead>
     <tbody>
-      <% @dates.each do |date| %>
-        <tr>
-          <td>
-            <% if date.off.present? %>
-              <%= Date.new(Date.today.year, date.off.off_month, date.off.off_day).strftime("%Y-%m-%d") %>
-            <% else %>
-              データが見つかりません
-            <% end %>
-          </td>
-          <td><%= date.transfer_date.strftime("%Y-%m-%d") if date.transfer_date %></td>
-          <td><%= date.transfer_time %></td>
-          <td><%= date.level %></td>
-        </tr>
-      <% end %>
+    <% @dates.each do |date| %>
+      <tr>
+        <td>
+          <% if date.off.present? %>
+            <%= date.off.off_month.strftime("%Y-%m-%d") %>
+          <% else %>
+            データが見つかりません
+          <% end %>
+        </td>
+        <td><%= date.transfer_date.strftime("%Y-%m-%d") if date.transfer_date %></td>
+        <td><%= date.transfer_time %></td>
+        <td><%= date.level %></td>
+      </tr>
+      <% end %> 
     </tbody>
-  </table>
+</table>
 </div>
+
+<%= link_to '戻る', customers_show_path %>

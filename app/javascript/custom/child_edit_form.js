@@ -1,10 +1,19 @@
-document.addEventListener("DOMContentLoaded", function () {
+function initializeChildEditFormScripts() {
+    const currentPath = window.location.pathname;
+
+    // '/child/:id/edit' のパスだけでスクリプトを実行する
+    const childEditPathRegex = /^\/child\/\d+\/edit$/;
+    if (!childEditPathRegex.test(currentPath)) {
+        console.log("child_edit_form.js: 対象外のページです。スクリプトを実行しません。");
+        return;
+    }
+
     const daySelect = document.getElementById("contact_dey");
     const timeSelect = document.getElementById("contact_time");
 
     if (!daySelect || !timeSelect) {
         console.error("contact_dey または contact_time が見つかりませんでした。");
-        return; // 処理を中断
+        return;
     }
 
     const timeOptions = {
@@ -16,7 +25,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function updateContactTimeOptions() {
         const selectedDay = daySelect.value;
-        console.log("選択された契約曜日:", selectedDay);
         timeSelect.innerHTML = ""; // 現在のオプションをクリア
 
         if (timeOptions[selectedDay]) {
@@ -27,7 +35,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 timeSelect.appendChild(option);
             });
 
-            // 契約時間の初期値を設定
             const currentTime = timeSelect.getAttribute("data-current-time");
             if (currentTime) {
                 timeSelect.value = currentTime;
@@ -40,9 +47,10 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    // 初期化処理
     updateContactTimeOptions();
-
-    // 契約曜日変更時に契約時間を更新
     daySelect.addEventListener("change", updateContactTimeOptions);
-});
+}
+
+// TurboとDOMContentLoadedの両方で実行
+document.addEventListener("DOMContentLoaded", initializeChildEditFormScripts);
+document.addEventListener("turbo:load", initializeChildEditFormScripts);

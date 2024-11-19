@@ -1,61 +1,22 @@
 <div class="container">
- <h2>お休み確定</h2>
- <h4>お休み確定致しました。</h4><br>
- <h4>ご登録ありがとうございました。</h4><br>
+  <h2>お休み確定</h2>
+  <h4>お休み確定致しました。</h4>
+  <h4>ご登録ありがとうございました。</h4>
 
-  <table class="table">
-    <thead>
-      <P>お休み情報</P>
-      <tr>
-        <th>お子さんの姓</th>
-        <th>お子さんの名</th>
-        <th>お休み日</th>
-        <th>契約曜日</th>
-        <th>契約時間</th>
-        <th>クラス</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>
-          <% if @off.child %>
-            <%= @off.child.last_name %>
-          <% else %>
-            データが見つかりません
-          <% end %>
-        </td>
-        <td>
-          <% if @off.child %>
-            <%= @off.child.first_name %>
-          <% else %>
-            データが見つかりません
-          <% end %>
-        </td>
-        <td>
-          <%= @off.off_day %>
-        </td>
-        <td>
-          <% if @off.child %>
-            <%= @off.child.contact_time %>
-          <% else %>
-            データが見つかりません
-          <% end %>
-        </td>
-        <td>
-          <% if @off.child %>
-            <%= @off.child.contact_dey %>
-          <% else %>
-            データが見つかりません
-          <% end %>
-        </td>
-        <td>
-          <% if @off.child %>
-            <%= @off.child.level %>
-          <% else %>
-            データが見つかりません
-          <% end %>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+  <div class="info">
+    <p><strong>お子さんの姓:</strong> <%= @off.child&.last_name || 'データが見つかりません' %></p>
+    <p><strong>お子さんの名:</strong> <%= @off.child&.first_name || 'データが見つかりません' %></p>
+    <p><strong>お休み日付:</strong> 
+      <% if @off.off_month.present? %>
+        <%= @off.off_month.strftime('%Y-%m-%d') %>
+      <% else %>
+        データが見つかりません
+      <% end %>
+    </p>
+    <p><strong>契約曜日:</strong> <%= @off.child&.contact_dey || 'データが見つかりません' %></p>
+    <p><strong>契約時間:</strong> <%= @off.child&.contact_time || 'データが見つかりません' %></p>
+    <p><strong>クラス:</strong> <%= @off.child&.level || 'データが見つかりません' %></p>
+  </div>
+
+  <%= link_to 'マイページへ', customers_show_path, class: 'btn btn-primary' %>
 </div>

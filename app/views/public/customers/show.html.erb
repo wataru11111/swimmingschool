@@ -1,77 +1,52 @@
-<div class="container">
-  <h2>マイページ</h2>
-  <h2>登録情報</h2>
+<div class="customer-container">
+  <!-- 登録情報セクション -->
+  <div class="section-header">
+    <h2>登録情報</h2>
+    <%= link_to '編集する', customers_information_edit_path, class: "btn-edit" %>
+  </div>
 
-  <!-- "編集する"ボタン -->
-<%= link_to '編集する', customers_information_edit_path, class: "btn-edit" %>
-
-
-  <table class="table">
-    <thead>
-      <tr>
-        <th>氏名</th>
-        <th>カナ</th>
-        <th>郵便番号</th>
-        <th>住所</th>
-        <th>電話番号</th>
-        <th>メールアドレス</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><%= current_customer.last_name %> <%= current_customer.first_name %></td>
-        <td><%= current_customer.last_name_kana %> <%= current_customer.first_name_kana %></td>
-        <td><%= current_customer.postal_code %></td>
-        <td><%= current_customer.address %></td>
-        <td><%= current_customer.telephone_number %></td>
-        <td><%= current_customer.email %></td>
-      </tr>
-    </tbody>
-  </table>
+  <div class="info">
+    <p><strong>氏名:</strong> <%= current_customer.last_name %> <%= current_customer.first_name %></p>
+    <p><strong>カナ:</strong> <%= current_customer.last_name_kana %> <%= current_customer.first_name_kana %></p>
+    <p><strong>郵便番号:</strong> <%= current_customer.postal_code %></p>
+    <p><strong>住所:</strong> <%= current_customer.address %></p>
+    <p><strong>電話番号:</strong> <%= current_customer.telephone_number %></p>
+    <p><strong>メールアドレス:</strong> <%= current_customer.email %></p>
+  </div>
 
   <% @children.each do |child| %>
-    <h2>お子さん情報</h2>
-    <div style="margin-bottom: 15px;">
-      <%= link_to '編集する', edit_child_path(child), class: "btn-edit" %>
+    <!-- 子供情報セクション -->
+    <div class="child-section">
+      <div class="section-header">
+        <h2>お子さん情報</h2>
+        <%= link_to '編集する', edit_child_path(child), class: "btn-edit" %>
+      </div>
+
+      <div class="info">
+        <p><strong>氏名:</strong> <%= child.last_name %> <%= child.first_name %></p>
+        <p><strong>カナ:</strong> <%= child.last_name_kana %> <%= child.first_name_kana %></p>
+        <p><strong>クラス:</strong> <%= child.level %></p>
+        <p><strong>契約時間:</strong> <%= child.contact_time %></p>
+        <p><strong>契約曜日:</strong> <%= child.contact_dey %></p>
+        <p>
+          <strong>お休み:</strong>
+          <%= Off.where(child_id: child.id, flag: 0).count %>日
+          <%= link_to 'お休みを確認', show_absences_off_path(id: child.id), class: "btn-confirm" %>
+        </p>
+      </div>
     </div>
-
-    <table class="table">
-      <thead>
-        <tr>
-          <th>氏名</th>
-          <th>カナ</th>
-          <th>クラス</th>
-          <th>契約時間</th>
-          <th>契約曜日</th>
-          <th>お休み</th>
-        </tr>
-      </thead>
-
-      <tbody>
-        <tr>
-          <td><%= child.last_name %> <%= child.first_name %></td>
-          <td><%= child.last_name_kana %> <%= child.first_name_kana %></td>
-          <td><%= child.level %></td>
-          <td><%= child.contact_time %></td>
-          <td><%= child.contact_dey %></td>
-          <td>
-            <%= Off.where(child_id: child.id, flag: 0).count %>日
-            <%= link_to 'お休みを確認', show_absences_off_path(id: child.id), class: "btn-confirm" %>
-          </td>
-        </tr>
-      </tbody>
-    </table>
   <% end %>
 
-  <!-- お子さん登録ボタンをお子さん情報の下に移動 -->
-  <div style="text-align: center; margin: 20px 0;">
+  <!-- お子さん登録ボタン -->
+  <div class="actions">
     <%= link_to 'お子さん登録', new_child_path, class: "btn-register" %>
   </div>
 
-  <!-- 他のボタン -->
-  <div style="margin-top: 20px;">
+
+  <!-- 他の操作ボタン -->
+  <div class="actions">
     <%= link_to 'お休み登録', offs_path, class: "btn-holiday" %>
     <%= link_to '振替日登録', date_index_path, class: "btn-transfer" %>
-    <%= link_to '振替 履歴', dates_confirmation_path, class: "btn-history" %>
+    <%= link_to '振替履歴', dates_confirmation_path, class: "btn-history" %>
   </div>
 </div>

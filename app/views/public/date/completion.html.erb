@@ -16,7 +16,7 @@
       <tr>
         <td>
           <% if @dates.off.present? %>
-            <%= Date.new(Date.today.year, @dates.off.off_month, @dates.off.off_day).strftime("%Y-%m-%d") %>
+            <%= @dates.off.off_month.strftime("%Y-%m-%d") %>
           <% else %>
             データが見つかりません
           <% end %>

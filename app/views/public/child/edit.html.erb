@@ -1,4 +1,4 @@
-<div class="container">
+<div id="child-edit-page" class="container">
   <h2>お子さん情報編集</h2>
 
   <%= form_with model: @child, url: child_path, method: :patch do |f| %>
@@ -23,7 +23,7 @@
     </div>
 
     <div class="field">
-      <%= f.label :契約曜日 %><br />
+      <%= f.label :契約曜日, for: "contact_dey" %><br />
       <%= f.select :contact_dey, 
                    [["水曜日", "水曜日"], ["木曜日", "木曜日"], ["土曜日", "土曜日"], ["日曜日", "日曜日"]], 
                    { include_blank: "曜日選択", selected: @child.contact_dey }, 
@@ -37,7 +37,7 @@
     </div>
 
     <div class="field">
-      <%= f.label :契約時間 %><br />
+      <%= f.label :契約時間, for: "contact_time" %><br />
       <%= f.select :contact_time, [], 
               { include_blank: "時間選択" }, 
               { id: "contact_time", "data-current-time": @child.contact_time } %>
@@ -48,10 +48,12 @@
       <%= f.text_field :telephone_number, autofocus: true, autocomplete: "telephone_number" %>
     </div>
 
-    <div class=row>
+    <div class="row">
       <div class="actions">
         <%= f.submit "編集内容を保存" %>
       </div>
     </div>
   <% end %>
 </div>
+
+<%= link_to '戻る', customers_show_path %>

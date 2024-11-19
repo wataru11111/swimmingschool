@@ -21,9 +21,21 @@
   </div>
 <% end %>
 
-<%= form_with model: @date, url: date_index_path, method: :post do |f| %>
+<!-- エラーメッセージを表示 -->
+<% if @date&.errors&.any? %>
+  <div class="alert alert-danger">
+    <h4>入力エラーがあります:</h4>
+    <ul>
+      <% @date.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
 
+<%= form_with model: @date, url: date_index_path, method: :post do |f| %>
   <h3>振り替え入力欄</h3>
+
   <div class="field">
     <%= f.label :last_name, "苗字", for: "last_name" %><br />
     <%= f.text_field :last_name, id: "last_name" %>
@@ -35,13 +47,8 @@
   </div>
 
   <div class="field">
-    <%= f.label :transfer_month, "振替月", for: "transfer_month" %><br />
-    <%= f.select :transfer_month, (1..12).map { |m| [m.to_s + "月", m] }, { include_blank: "月選択" }, { id: "transfer_month" } %>
-  </div>
-
-  <div class="field">
-    <%= f.label :transfer_day, "振替日", for: "transfer_day" %><br />
-    <%= f.select :transfer_day, (1..31).map { |d| [d.to_s + "日", d] }, { include_blank: "日選択" }, { id: "transfer_day" } %>
+    <%= f.label :transfer_date, "振替日", for: "transfer_date" %><br />
+    <%= f.date_field :transfer_date, id: "transfer_date" %>
   </div>
 
   <div class="field">
@@ -61,8 +68,8 @@
   </div>
 
   <div class="field">
-    <%= f.label :contact_time, "振替時間", for: "contact_time" %><br />
-    <%= f.select :contact_time, [], { include_blank: "時間選択" }, { id: "contact_time" } %>
+    <%= f.label :transfer_time, "振替時間", for: "transfer_time" %><br />
+    <%= f.select :transfer_time, [], { include_blank: "時間選択" }, { id: "transfer_time" } %>
   </div>
 
   <div class="field">
@@ -70,12 +77,9 @@
     <%= f.text_field :telephone_number, id: "telephone_number", autofocus: true, autocomplete: "telephone_number" %>
   </div>
 
-  <p>通常通り時間が異なる場合の振り替えは、<br>こちらの電話番号に <strong>080-5011-9947</strong> 「お名前」「振替日」「振替時間」をショートメッセージ(SMS)でお送りください。</p>
-
   <div class="row">
     <div class="actions"><br>
       <%= f.submit "振替申込み", data: { confirm: "本当にこの日でよろしいですか？" } %>
     </div>
   </div>
-
 <% end %>
