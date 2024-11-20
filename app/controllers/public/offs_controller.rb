@@ -64,7 +64,7 @@ module Public
 
     def show_absences
       @child = Child.find(params[:id])
-      @offs = Off.where(child_id: @child.id)
+      @offs = Off.where(child_id: @child.id).order(created_at: :desc)
     end
 
     def edit_absence

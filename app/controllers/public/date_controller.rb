@@ -49,8 +49,11 @@ class Public::DateController < ApplicationController
   end
 
   def confirmation
-    @dates = Transfer.joins(:child).where(children: { customer_id: current_customer.id })
+    @dates = Transfer.joins(:child)
+                     .where(children: { customer_id: current_customer.id })
+                     .order(transfer_date: :desc) # 振替日を降順で並べ替え
   end
+  
 
   def completion
     @dates = Transfer.find(params[:id])

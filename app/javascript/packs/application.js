@@ -3,34 +3,37 @@
 // a relevant structure within app/javascript and only use these pack files to reference
 // that code so it'll be compiled.
 
-import Rails from "@rails/ujs"
-import Turbolinks from "turbolinks"
-import * as ActiveStorage from "@rails/activestorage"
-import "channels"
+// 必要なライブラリをインポート
+import Rails from "@rails/ujs";
+import Turbolinks from "turbolinks";
+import * as ActiveStorage from "@rails/activestorage";
+import "channels";
 
-
+Rails.start();
+Turbolinks.start();
+ActiveStorage.start();
 
 import "jquery";
 import "popper.js";
 import "bootstrap";
 import "../stylesheets/application";
-import "../custom/date_form";// ここでカスタムスクリプトをインポートする
-import "../custom/child_form"; // 上記JSファイルのパスに合わせて変更
+import "../custom/date_form";
+import "../custom/child_form";
 import "../custom/child_edit_form";
 
-Rails.start()
-Turbolinks.start()
-ActiveStorage.start()
+import { Calendar } from "@fullcalendar/core";
+import dayGridPlugin from "@fullcalendar/daygrid";
 
-import {Calendar} from '@fullcalendar/core';
-import dayGridPlugin from '@fullcalendar/daygrid';
+// カレンダーの初期化
+function initializeCalendar() {
+  const calendarEl = document.getElementById("calendar");
+  if (calendarEl) {
+    const calendar = new Calendar(calendarEl, {
+      plugins: [dayGridPlugin],
+    });
+    calendar.render();
+  }
+}
 
-document.addEventListener('turbolinks:load', function () {
-    const calendarEl = document.getElementById('calendar');
-    if (calendarEl) {  // 要素が存在する場合のみ初期化
-        const calendar = new Calendar(calendarEl, {
-            plugins: [dayGridPlugin]
-        });
-        calendar.render();
-    }
-});
+// turbolinks:load イベントに対応
+document.addEventListener("turbolinks:load", initializeCalendar);

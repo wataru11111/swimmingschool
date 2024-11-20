@@ -1,3 +1,17 @@
 // Place all the styles related to the public/calendar controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+
+.calendar-photo-container {
+    text-align: center; /* 写真を中央揃え */
+    margin-top: 20px;
+  }
+  
+  .calendar-photo {
+    max-width: 100%; /* 幅を調整してレスポンシブ対応 */
+    height: auto; /* 高さを自動調整 */
+    border: 2px solid #ddd; /* 枠線を追加 */
+    border-radius: 10px; /* 角を丸く */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 影を追加 */
+  }
+  
