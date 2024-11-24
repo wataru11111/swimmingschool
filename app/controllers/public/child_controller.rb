@@ -7,28 +7,36 @@ class Public::ChildController < ApplicationController
     @child = Child.new(child_params)
     @child.customer_id = current_customer.id
     if @child.save
-      redirect_to customers_show_path
+      redirect_to customers_show_path, notice: "お子さんの情報を登録しました。"
     else
-      Rails.logger.error(@child.errors.full_messages) # エラー内容をログに出力
+      flash[:alert] = "お子さん情報の登録に失敗しました: #{@child.errors.full_messages.join(', ')}"
       render :new
     end
   end
 
   def edit
-    @child = current_customer.children.find(params[:id]) # 子供をIDで取得
-     puts "契約曜日: #{@child.contact_dey}"
-     puts "契約時間: #{@child.contact_time}"
+    @child = current_customer.children.find(params[:id])
+    Rails.logger.debug("契約曜日: #{@child.contact_dey}, 契約時間: #{@child.contact_time}")
   end
 
   def update
-    @child = current_customer.children.find(params[:id]) # 子供をIDで取得
+    @child = current_customer.children.find(params[:id])
     if @child.update(child_params)
       redirect_to customers_show_path, notice: "お子さんの情報を更新しました。"
     else
-      Rails.logger.error(@child.errors.full_messages) # エラー内容をログに出力
-      flash[:alert] = "情報の更新に失敗しました。"
+      flash[:alert] = "情報の更新に失敗しました: #{@child.errors.full_messages.join(', ')}"
       render :edit
     end
+  end
+
+  def destroy
+    @child = current_customer.children.find(params[:id])
+    if @child.destroy
+      flash[:notice] = "お子さん情報を削除しました。"
+    else
+      flash[:alert] = "お子さん情報を削除できませんでした。"
+    end
+    redirect_to customers_show_path
   end
 
   private

@@ -54,6 +54,14 @@
       </div>
     </div>
   <% end %>
+
+  <!-- 削除ボタン -->
+  <div class="delete-actions">
+    <%= button_to 'お子さん情報を削除する', child_path(@child), 
+                  method: :delete, 
+                  data: { confirm: '本当に削除しますか？' }, 
+                  class: 'btn btn-danger' %>
+  </div>
 </div>
 
 <%= link_to '戻る', customers_show_path %>

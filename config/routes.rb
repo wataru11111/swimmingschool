@@ -32,7 +32,7 @@ Rails.application.routes.draw do
 
     get '/calender/index' => "calendar#index"
 
-    resources :child, only: [:new, :edit, :update, :create]
+    resources :child, only: [:new, :edit, :update, :create, :destroy]
 
     # マイページのルートに名前付きルートを追加
     get '/customers/show' => "customers#show", as: 'customers_show'
