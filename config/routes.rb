@@ -11,6 +11,7 @@ Rails.application.routes.draw do
     get '/' => "homes#top"
     resources :calendar, only: [:new, :index, :edit, :create, :update]
     resources :customers, only: [:show, :index, :edit, :update]
+    resources :offs, only: [:index] # お休み一覧ページのルートを追加
   end
 
   scope module: :public do

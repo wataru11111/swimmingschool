@@ -1,45 +1,72 @@
 <div class="container">
+  <h1>会員一覧</h1>
 
-<h1>会員一覧</h1>
+  <!-- ジャンプリンク -->
+  <div class="alphabet-links mb-3">
+    <% ["あ行", "か行", "さ行", "た行", "な行", "は行", "ま行", "や行", "ら行", "わ行"].each_with_index do |group, index| %>
+      <%= link_to group, "#section-#{index}", class: "btn btn-secondary btn-sm" %>
+    <% end %>
+  </div>
 
-<table class="table">
-  <thead>
-    <tr>
-      <th>会員ID</th>
-      <th>氏名</th>
-      <th>メールアドレス</th>
-      <th>電話番号</th>
-      <th>ステータス</th>
-    </tr>
- </thead>
+  <!-- 会員テーブル -->
+  <table class="table">
+    <thead>
+      <tr>
+        <th>会員ID</th>
+        <th>氏名</th>
+        <th>メールアドレス</th>
+        <th>電話番号</th>
+        <th>ステータス</th>
+      </tr>
+    </thead>
 
-<tbody>
-<% @customers.each do |customers| %>
-<tr>
-<td>
-<%= customers.id %>
-</td>
-<td>
-<%= link_to admin_customer_path(customers.id) do %>
-<%= customers.last_name %> <%= customers.first_name%>
-<% end %>
-</td>
-<td>
-<%= customers.email %>
-</td>
-<td>
-<%= customers.telephone_number %>
-</td>
-<td>
-<%if customers.is_deleted %>
-<h4>退会</h4>
-<% else %>
-<h4>有効</h4>
-<% end %>
-</td>
-<% end %>
-</tr>
-</tbody>
-</table>
-<%= paginate @customers %>
+    <% current_group = nil %>
+    <tbody>
+      <% @customers.each do |customer| %>
+        <% first_char = customer.last_name_kana[0] %> <!-- 最初の文字を取得 -->
+        <% new_group = case first_char
+          when /^[あ-お]/ then "あ行"
+          when /^[か-こ]/ then "か行"
+          when /^[さ-そ]/ then "さ行"
+          when /^[た-と]/ then "た行"
+          when /^[な-の]/ then "な行"
+          when /^[は-ほ]/ then "は行"
+          when /^[ま-も]/ then "ま行"
+          when /^[や-よ]/ then "や行"
+          when /^[ら-ろ]/ then "ら行"
+          when /^[わ-ん]/ then "わ行"
+          else nil
+        end %>
+
+        <% if current_group != new_group %>
+          <% current_group = new_group %>
+          <!-- グループセクション -->
+          <tr>
+            <td colspan="5" id="section-<%= ["あ行", "か行", "さ行", "た行", "な行", "は行", "ま行", "や行", "ら行", "わ行"].index(current_group) %>" class="bg-light text-center font-weight-bold">
+              <%= current_group %>
+            </td>
+          </tr>
+        <% end %>
+
+        <!-- 会員情報 -->
+        <tr>
+          <td><%= customer.id %></td>
+          <td><%= link_to admin_customer_path(customer.id) do %>
+            <%= customer.last_name %> <%= customer.first_name %>
+          <% end %></td>
+          <td><%= customer.email %></td>
+          <td><%= customer.telephone_number %></td>
+          <td>
+            <% if customer.is_deleted %>
+              <h4>退会</h4>
+            <% else %>
+              <h4>有効</h4>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <%= paginate @customers %>
 </div>

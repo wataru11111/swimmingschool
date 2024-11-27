@@ -18,7 +18,12 @@ class Admin::SessionsController < Devise::SessionsController
   #   super
   # end
 
-  # protected
+  protected
+
+  # ログイン後のリダイレクト先を指定
+  def after_sign_in_path_for(resource)
+    admin_customers_path # 会員一覧ページ
+  end
 
   # If you have extra params to permit, append them to the sanitizer.
   # def configure_sign_in_params
