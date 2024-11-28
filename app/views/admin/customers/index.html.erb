@@ -57,10 +57,13 @@
           <td><%= customer.email %></td>
           <td><%= customer.telephone_number %></td>
           <td>
-            <% if customer.is_deleted %>
-              <h4>退会</h4>
-            <% else %>
-              <h4>有効</h4>
+            <% case customer.status %>
+            <% when "active" %>
+              <h4 class="text-success">有効</h4>
+            <% when "suspended" %>
+              <h4 class="text-warning">休会中</h4>
+            <% when "inactive" %>
+              <h4 class="text-danger">無効</h4>
             <% end %>
           </td>
         </tr>

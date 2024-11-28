@@ -11,9 +11,11 @@ class DeviseCreateCustomers < ActiveRecord::Migration[6.1]
       t.string "postal_code"
       t.string "address"
       t.string "telephone_number"
-      t.boolean "is_deleted",       null: false, default: false
       t.string :email,              null: false, default: ""
       t.string :encrypted_password, null: false, default: ""
+
+      ## 状態管理
+      t.integer :status, null: false, default: 0 # 0: 有効, 1: 休会中, 2: 無効
 
       ## Recoverable
       t.string   :reset_password_token
@@ -40,13 +42,10 @@ class DeviseCreateCustomers < ActiveRecord::Migration[6.1]
       # t.string   :unlock_token # Only if unlock strategy is :email or :both
       # t.datetime :locked_at
 
-
       t.timestamps null: false
     end
 
-    add_index :customers, :email,                unique: true
+    add_index :customers, :email, unique: true
     add_index :customers, :reset_password_token, unique: true
-    # add_index :customers, :confirmation_token,   unique: true
-    # add_index :customers, :unlock_token,         unique: true
   end
 end

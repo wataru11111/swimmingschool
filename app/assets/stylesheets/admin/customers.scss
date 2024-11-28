@@ -1,21 +1,58 @@
 // Place all the styles related to the admin/customers controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+
 .alphabet-links {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 5px;
-    margin-bottom: 10px;
-  
-    a {
-      text-decoration: none;
-      color: white;
-      background-color: #6c757d;
-      padding: 5px 10px;
-      border-radius: 5px;
-      &:hover {
-        background-color: #5a6268;
-      }
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-bottom: 10px;
+
+  a {
+    text-decoration: none;
+    color: white;
+    background-color: #6c757d;
+    padding: 5px 10px;
+    border-radius: 5px;
+
+    &:hover {
+      background-color: #5a6268;
     }
   }
-  
+}
+
+.customer-info,
+.child-info {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
+
+  .col-md-3 {
+    flex: 1 1 calc(25% - 10px); /* 各カラムを25%の幅で表示 */
+    margin-bottom: 10px;
+  }
+
+  strong {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+
+  span {
+    font-size: 14px;
+  }
+}
+
+.actions.admin {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px; /* ボタン間のスペースを設定 */
+  margin-top: 20px; /* 上部に余白を追加 */
+}
+
+.actions.admin .btn {
+  flex: 1; /* ボタンの幅を調整 */
+  text-align: center;
+}
+

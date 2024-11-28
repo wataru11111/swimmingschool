@@ -10,8 +10,15 @@ Rails.application.routes.draw do
   namespace :admin do
     get '/' => "homes#top"
     resources :calendar, only: [:new, :index, :edit, :create, :update]
-    resources :customers, only: [:show, :index, :edit, :update]
-    resources :offs, only: [:index] # お休み一覧ページのルートを追加
+    resources :customers, only: [:show, :index, :edit, :update] do
+      member do
+        post :password_reset # パスワードリセットルートをPOSTに設定
+        get :history         # 履歴ページをGETリクエストで設定
+        patch :change_status
+      end
+    end
+    resources :offs, only: [:index] # お休み一覧ページのルート
+    resources :child, only: [:edit, :update] # 管理者用の子供編集ページ
   end
 
   scope module: :public do

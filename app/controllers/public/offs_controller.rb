@@ -5,6 +5,12 @@ module Public
     end
 
     def create
+      # 休会中チェック
+      if current_customer.status == "suspended"
+        flash[:alert] = "休会中はお休みを取ることができません。"
+        redirect_to customers_show_path and return
+      end
+    
       begin
         # フォームから送られる off_month を使用して日付を作成
         off_date = Date.new(
@@ -56,6 +62,7 @@ module Public
         render :index
       end
     end
+    
     
 
     def index

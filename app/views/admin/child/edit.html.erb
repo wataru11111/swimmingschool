@@ -1,0 +1,44 @@
+<div class="container">
+  <h2>お子さん情報編集</h2>
+
+  <%= form_with model: @child, url: admin_child_path(@child), method: :patch do |f| %>
+    <div class="form-group">
+      <%= f.label :last_name, "姓" %>
+      <%= f.text_field :last_name, class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :first_name, "名" %>
+      <%= f.text_field :first_name, class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :last_name_kana, "姓カナ" %>
+      <%= f.text_field :last_name_kana, class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :first_name_kana, "名カナ" %>
+      <%= f.text_field :first_name_kana, class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :level, "クラス" %>
+      <%= f.text_field :level, class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :contact_dey, "契約曜日" %>
+      <%= f.text_field :contact_dey, class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :contact_time, "契約時間" %>
+      <%= f.text_field :contact_time, class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= f.submit "更新", class: "btn btn-primary" %>
+    </div>
+  <% end %>
+</div>

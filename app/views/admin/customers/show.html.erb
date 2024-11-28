@@ -1,90 +1,90 @@
 <div class="container">
- <h2>会員詳細</h2>
+  <h2>会員詳細</h2>
 
-<table class="table">
-  <thead>
-    <tr>
-      <th>会員ID</th>
-      <th>氏名</th>
-      <th>カナ</th>
-      <th>郵便番号</th>
-      <th>住所</th>
-      <th>電話番号</th>
-      <th>メールアドレス</th>
-      <th>ステータス</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-    <td>
-      <%= @customer.id %>
-   </td>
-    <td>
-      <%= @customer.last_name %> <%= @customer.first_name %>
-   </td>
-    <td>
-      <%= @customer.last_name_kana %> <%= @customer.first_name_kana %>
-    </td>
-   <td>
-      <%= @customer.postal_code %>
-   </td>
-   <td>
-      <%= @customer.address %>
-   </td>
-   <td>
-      <%= @customer.telephone_number %>
-   </td>
-    <td>
-      <%= @customer.email %>
-   </td>
-      <td>
-   <%if @customer.is_deleted %>
-      <h4>退会</h4>
-      <% else %>
-      <h4>有効</h4>
+  <!-- 会員情報 -->
+  <div class="customer-info row">
+    <div class="col-md-3">
+      <strong>会員ID:</strong> <%= @customer.id %>
+    </div>
+    <div class="col-md-3">
+      <strong>氏名:</strong> <%= @customer.last_name %> <%= @customer.first_name %>
+    </div>
+    <div class="col-md-3">
+      <strong>カナ:</strong> <%= @customer.last_name_kana %> <%= @customer.first_name_kana %>
+    </div>
+    <div class="col-md-3">
+      <strong>郵便番号:</strong> <%= @customer.postal_code %>
+    </div>
+    <div class="col-md-3">
+      <strong>住所:</strong> <%= @customer.address %>
+    </div>
+    <div class="col-md-3">
+      <strong>電話番号:</strong> <%= @customer.telephone_number %>
+    </div>
+    <div class="col-md-3">
+      <strong>メールアドレス:</strong> <%= @customer.email %>
+    </div>
+    <div class="col-md-3">
+      <strong>ステータス:</strong>
+      <span class="badge <%= @customer.active? ? 'bg-success' : @customer.suspended? ? 'bg-warning' : 'bg-danger' %>">
+        <%= Customer.statuses_i18n[@customer.status] %>
+      </span>
+    </div>
+    <div class="col-md-12 mt-3">
+      <h3>ステータス変更</h3>
+      <%= form_with url: change_status_admin_customer_path(@customer), method: :patch, local: true do |f| %>
+        <div class="form-group">
+          <%= f.label :status, "ステータスを選択" %>
+          <%= f.select :status, Customer.statuses_i18n.map { |key, value| [value, key] }, {}, class: "form-control" %>
+        </div>
+        <div class="form-group mt-2">
+          <%= f.submit "変更", class: "btn btn-primary" %>
+        </div>
       <% end %>
-      </td>
-  </tr>
-  </tbody>
-</table>
+    </div>
+    <div class="col-md-3">
+      <strong>パスワードリセット:</strong>
+      <%= link_to "パスワードをリセットする", password_reset_admin_customer_path(@customer), method: :post, class: "btn btn-danger btn-sm", data: { confirm: "本当にパスワードをリセットしますか？" } %>
+    </div>
+  </div>
 
-<% @customer.child.each do |child| %>
-  <h2>お子さん情報</h2>
-  <%= link_to edit_child_path(child) do %>
-    <p>編集する</p>
+  <!-- お子さん情報 -->
+  <% @customer.children.each do |child| %>
+    <h2 class="mt-5">お子さん情報</h2>
+    <%= link_to edit_admin_child_path(child), class: "btn btn-warning" do %>
+  お子さん情報を編集
+<% end %>
+
+    <div class="child-info row">
+      <div class="col-md-3">
+        <strong>氏名:</strong> <%= child.last_name %> <%= child.first_name %>
+      </div>
+      <div class="col-md-3">
+        <strong>カナ:</strong> <%= child.last_name_kana %> <%= child.first_name_kana %>
+      </div>
+      <div class="col-md-3">
+        <strong>クラス:</strong> <%= child.level %>
+      </div>
+      <div class="col-md-3">
+        <strong>契約曜日:</strong> <%= child.contact_dey %>
+      </div>
+      <div class="col-md-3">
+        <strong>契約時間:</strong> <%= child.contact_time %>
+      </div>
+      <div class="col-md-3">
+        <strong>お休み:</strong> <%= Off.where(child_id: child.id, flag: 0).count %>日
+      </div>
+    </div>
   <% end %>
 
-  <table class="table">
-    <thead>
-      <tr>
-        <th>氏名</th>
-        <th>カナ</th>
-        <th>クラス</th>
-        <th>契約曜日</th>
-        <th>契約時間</th>
-        <th>お休み</th>
-      </tr>
-    </thead>
+  <!-- リンク -->
+  <div class="actions admin mt-4 gap-3">
+    <%= link_to history_admin_customer_path(@customer), class: "btn btn-info" do %>
+      お休みと振替日<br>履歴一覧を見る
+    <% end %>
 
-    <tbody>
-      <tr>
-        <td><%= child.last_name %> <%= child.first_name %></td>
-        <td><%= child.last_name_kana %> <%= child.first_name_kana %></td>
-        <td><%= child.level %></td>
-        <td><%= child.contact_time %></td>
-        <td><%= child.contact_dey %></td>
-        <td><%= Off.where(child_id: child.id, flag: 0).count %>日</td>
-      </tr>
-    </tbody>
-  </table>
-<% end %>
-
-<%= link_to admin_path do %>
-<p>注文履歴一覧を見る</p>
-<% end %>
-
-<%= link_to edit_admin_customer_path do %>
-<p>編集する</p>
-<% end %>
-
+    <%= link_to edit_admin_customer_path, class: "btn btn-primary" do %>
+      会員情報を編集する
+    <% end %>
+  </div>
 </div>
