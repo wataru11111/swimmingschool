@@ -5,7 +5,7 @@ class CreateOffs < ActiveRecord::Migration[6.1]
       t.date     "off_day"          # 日を保存するカラム
       t.integer  "child_id",        null: false
       t.string   "level",           null: false
-      t.string   "flag",            null: false
+      t.integer   "flag",            null: false
       t.string   "last_name",       null: false
       t.string   "first_name",      null: false
       t.string   "contact_time",    null: false

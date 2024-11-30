@@ -1,5 +1,4 @@
-module Public
-  class OffsController < ApplicationController
+class Public::OffsController < ApplicationController
     def new
       @off = Off.find_by(id: params[:off_id]) || Off.new
     end
@@ -9,7 +8,7 @@ module Public
       if current_customer.status == "suspended"
         flash[:alert] = "休会中はお休みを取ることができません。"
         redirect_to customers_show_path and return
-      end
+    end
     
       begin
         # フォームから送られる off_month を使用して日付を作成
@@ -62,8 +61,6 @@ module Public
         render :index
       end
     end
-    
-    
 
     def index
       @offs = Off.all
@@ -71,6 +68,16 @@ module Public
 
     def show_absences
       @child = Child.find(params[:id])
+
+      # お子さんに関連するすべてのお休みデータを取得
+      @offs = Off.where(child_id: @child.id).order(created_at: :desc)
+
+      # 期限切れのデータをチェックして処理
+      @offs.each do |off|
+        off.check_and_update_expiration if off.expired?
+      end
+
+      # 更新後のデータを再取得
       @offs = Off.where(child_id: @child.id).order(created_at: :desc)
     end
 
@@ -115,7 +122,6 @@ module Public
     private
 
     def off_params
-      params.require(:off).permit(:off_day, :off_month, :child_id, :level, :flag, :contact_time, :contact_dey)
+      params.require(:off).permit(:off_day, :off_month, :child_id, :level, :contact_time, :contact_dey)
     end
   end
-end

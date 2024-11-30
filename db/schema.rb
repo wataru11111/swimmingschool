@@ -63,7 +63,7 @@ ActiveRecord::Schema.define(version: 2023_07_26_075636) do
     t.date "off_day"
     t.integer "child_id", null: false
     t.string "level", null: false
-    t.string "flag", null: false
+    t.integer "flag", null: false
     t.string "last_name", null: false
     t.string "first_name", null: false
     t.string "contact_time", null: false

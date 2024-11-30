@@ -11,7 +11,10 @@
           <!-- `off_month` を直接フォーマット -->
           <%= off.off_month.strftime("%m月 %d日") %> <!-- お休みの日付を表示 -->
 
-          <% if off.transfer_registered? %>
+          <% if off.flag == 2 %>
+            <!-- 期限切れの表示 -->
+            <span class="badge badge-danger">期限切れ</span>
+          <% elsif off.transfer_registered? %>
             <% transfer = off.registered_transfer %>
             <span class="badge badge-success">
               振替済み (振替日: <%= transfer.transfer_date.strftime("%m月 %d日") %>)
