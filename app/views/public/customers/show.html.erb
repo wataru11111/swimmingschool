@@ -1,24 +1,9 @@
 <div class="customer-container">
-  <!-- 登録情報セクション -->
-  <div class="section-header">
-    <h2>登録情報</h2>
-    <%= link_to '編集する', customers_information_edit_path, class: "btn-edit" %>
-  </div>
-
-  <div class="info">
-    <p><strong>氏名:</strong> <%= current_customer.last_name %> <%= current_customer.first_name %></p>
-    <p><strong>カナ:</strong> <%= current_customer.last_name_kana %> <%= current_customer.first_name_kana %></p>
-    <p><strong>郵便番号:</strong> <%= current_customer.postal_code %></p>
-    <p><strong>住所:</strong> <%= current_customer.address %></p>
-    <p><strong>電話番号:</strong> <%= current_customer.telephone_number %></p>
-    <p><strong>メールアドレス:</strong> <%= current_customer.email %></p>
-  </div>
-
   <% @children.each do |child| %>
     <!-- 子供情報セクション -->
     <div class="child-section">
       <div class="section-header">
-        <h2>お子さん情報</h2>
+        <h2>会員情報</h2>
         <%= link_to '編集する', edit_child_path(child), class: "btn-edit" %>
       </div>
 
@@ -39,7 +24,8 @@
 
   <!-- お子さん登録ボタン -->
   <div class="actions">
-    <%= link_to 'お子さん登録', new_child_path, class: "btn-register" %>
+    <%= link_to '会員登録', new_child_path, class: "btn-register" %>
+    <p>※兄弟姉妹一人一人登録してください</p>
   </div>
 
 

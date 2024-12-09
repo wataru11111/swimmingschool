@@ -23,7 +23,7 @@
     <% current_group = nil %>
     <tbody>
       <% @customers.each do |customer| %>
-        <% first_char = customer.last_name_kana[0] %> <!-- 最初の文字を取得 -->
+        <% first_char = customer.last_name_kana[0] %>
         <% new_group = case first_char
           when /^[あ-お]/ then "あ行"
           when /^[か-こ]/ then "か行"
@@ -40,7 +40,6 @@
 
         <% if current_group != new_group %>
           <% current_group = new_group %>
-          <!-- グループセクション -->
           <tr>
             <td colspan="5" id="section-<%= ["あ行", "か行", "さ行", "た行", "な行", "は行", "ま行", "や行", "ら行", "わ行"].index(current_group) %>" class="bg-light text-center font-weight-bold">
               <%= current_group %>
@@ -64,6 +63,20 @@
               <h4 class="text-warning">休会中</h4>
             <% when "inactive" %>
               <h4 class="text-danger">無効</h4>
+            <% end %>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="5">
+            <strong>お子さんの名前:</strong>
+            <% if customer.children.present? %>
+              <ul>
+                <% customer.children.each do |child| %>
+                  <li><%= child.last_name %> <%= child.first_name %></li>
+                <% end %>
+              </ul>
+            <% else %>
+              <span>登録されているお子さんはいません。</span>
             <% end %>
           </td>
         </tr>

@@ -6,13 +6,21 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+    <!-- PWA関連のリンク -->
+    <link rel="manifest" href="/manifest.json">
+    <script>
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/service-worker.js')
+          .then(() => console.log('Service Worker Registered'))
+          .catch(error => console.error('Service Worker Registration Failed:', error));
+      }
+    </script>
   </head>
 
-  <!-- ヘッダーを固定表示に -->
   <header>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <div class="container">
@@ -31,7 +39,7 @@
               </li>
               <li class="nav-item">
                 <%= link_to new_child_path, class: 'nav-link text-light' do %>
-                  <i class="fas fa-link"></i>お子さん登録
+                  <i class="fas fa-link"></i>会員登録
                 <% end %>
               </li>
               <li class="nav-item">
@@ -83,9 +91,7 @@
     </nav>
   </header>
 
-  <!-- 背景スタイルの適用 -->
   <body class="<%= current_page?(root_path) ? 'top-page-background' : 'custom-background' %>">
-    
     <main>
       <%= yield %>
     </main>

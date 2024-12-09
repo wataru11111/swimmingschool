@@ -3,6 +3,7 @@ class Admin::CustomersController < ApplicationController
 
   def index
     @customers = Customer.order(:last_name_kana).page(params[:page])
+    @customers = Customer.includes(:children).all.page(params[:page])
   end
 
   def show

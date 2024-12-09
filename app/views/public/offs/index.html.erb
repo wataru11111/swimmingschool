@@ -23,19 +23,19 @@
 
     <!-- お子さんの姓（last_name）の入力フィールド -->
     <div class="field">
-      <%= f.label :お子さんの姓 %><br />
+      <%= f.label :苗字 %><br />
       <%= f.text_field :child_last_name %>
     </div>
 
     <!-- お子さんの名（first_name）の入力フィールド -->
     <div class="field">
-      <%= f.label :お子さんの名 %><br />
+      <%= f.label :名前 %><br />
       <%= f.text_field :child_first_name %>
     </div>
     
     <div class="field">
       <%= f.label :お休み日付 %><br />
-      <%= f.date_select :off_month, include_blank: true %>
+      <%= f.date_select :off_month, { include_blank: true, use_month_numbers: true } %>
     </div>
 
     <div class="row">
