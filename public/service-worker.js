@@ -1,11 +1,11 @@
 const CACHE_NAME = "swimming-school-cache-v1";
 const urlsToCache = [
-  "/",
-  "/manifest.json",
-  "/assets/stylesheets/application.css",
-  "/assets/javascripts/application.js",
-  "/assets/images/icon-192x192.png",
-  "/assets/images/icon-512x512.png"
+    "/",
+    "/manifest.json",
+    "/assets/stylesheets/application.css",
+    "/assets/javascripts/application.js",
+    "/assets/icon-192x192.png",
+    "/assets/icon-512x512.png"
 ];
 
 // インストールイベント{}
