@@ -2,8 +2,7 @@ class Admin::CustomersController < ApplicationController
   before_action :authenticate_admin!
 
   def index
-    @customers = Customer.order(:last_name_kana).page(params[:page])
-    @customers = Customer.includes(:children).all.page(params[:page])
+    @customers = Customer.includes(:children).order(:last_name_kana).page(params[:page])
   end
 
   def show
