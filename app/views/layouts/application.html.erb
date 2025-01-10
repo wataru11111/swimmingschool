@@ -3,6 +3,7 @@
   <head>
     <title>Swimmingschool</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="theme-color" content="#4CAF50"> <!-- PWA用のテーマカラー -->
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -14,9 +15,11 @@
     <link rel="manifest" href="/manifest.json">
     <script>
       if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('/service-worker.js')
-          .then(() => console.log('Service Worker Registered'))
-          .catch(error => console.error('Service Worker Registration Failed:', error));
+        navigator.serviceWorker.register('/service-worker.js').then((registration) => {
+          console.log("Service Worker registered.");
+        }).catch((error) => {
+          console.error("Service Worker registration failed:", error);
+        });
       }
     </script>
   </head>
@@ -105,9 +108,10 @@
       </div>
     </footer>
 
-    <% if Rails.env.development? %>
-      admin:<%= current_admin.inspect %><br>
-      customer:<%= current_customer.inspect %>
-    <% end %>
+    <!-- テスト時のユーザー確認 -->
+    <%# if Rails.env.development? %>
+  <%#   admin:<%= current_admin.inspect %><br>
+  <%#   customer:<%= current_customer.inspect %>
+  <%# end %>
   </body>
 </html>

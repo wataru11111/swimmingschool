@@ -4,7 +4,6 @@
   font-size: 30px;
 }
 
-
 .fc-day-wed {
   background: #E1F5FE;
 }
@@ -21,4 +20,12 @@
   background: #F48FB1;
 }
 
+html, body {
+  height: 100%; /* ページ全体の高さを設定 */
+  overflow: auto; /* 必要に応じてスクロール可能にする */
+}
 
+form {
+  min-height: calc(100vh - 50px); /* ビューポート高さを考慮し、下部に余白を作る */
+  margin-bottom: 2rem; /* キーボード表示時の余白 */
+}

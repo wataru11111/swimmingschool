@@ -21,5 +21,8 @@ module Swimmingschool
 
     # Add application.css to the assets precompile list
     config.assets.precompile += %w( application.css )
+
+    # デフォルト言語を日本語に設定
+    config.i18n.default_locale = :ja
   end
 end

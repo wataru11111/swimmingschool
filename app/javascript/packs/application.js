@@ -16,7 +16,7 @@ ActiveStorage.start();
 import "jquery";
 import "popper.js";
 import "bootstrap";
-import "../stylesheets/application";
+import "../stylesheets/application.scss";
 import "../custom/date_form";
 import "../custom/child_form";
 import "../custom/child_edit_form";
@@ -37,3 +37,25 @@ function initializeCalendar() {
 
 // turbolinks:load イベントに対応
 document.addEventListener("turbolinks:load", initializeCalendar);
+
+// フォーカス時のスクロール調整
+document.querySelectorAll('input, select, textarea').forEach((element) => {
+  element.addEventListener('focus', (event) => {
+    setTimeout(() => {
+      event.target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }, 300); // ソフトキーボード表示後の調整
+  });
+});
+
+// フォーカス時の余白調整（ソフトキーボード対応）
+document.addEventListener("focusin", (event) => {
+  // フォームが入力中の場合、キーボード表示に対応
+  if (event.target.tagName === "INPUT" || event.target.tagName === "TEXTAREA") {
+    document.body.style.paddingBottom = "300px"; // ソフトキーボード分の余白を追加
+  }
+});
+
+document.addEventListener("focusout", () => {
+  // フォーカスが外れたら余白をリセット
+  document.body.style.paddingBottom = "0px";
+});

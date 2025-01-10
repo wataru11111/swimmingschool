@@ -1,0 +1,16 @@
+ja:
+  activerecord:
+    attributes:
+      user:
+        email: "メールアドレス"
+        password: "パスワード"
+  helpers:
+    submit:
+      login: "ログイン"
+  devise:
+    sessions:
+      new:
+        sign_in: "ログイン"
+        remember_me: "ログイン情報を記憶"
+        sign_up: "アカウント作成"
+  

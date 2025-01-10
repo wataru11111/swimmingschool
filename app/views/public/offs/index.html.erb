@@ -35,7 +35,7 @@
     
     <div class="field">
       <%= f.label :お休み日付 %><br />
-      <%= f.date_select :off_month, { include_blank: true, use_month_numbers: true } %>
+      <%= f.date_select :off_month, { include_blank: true, use_month_numbers: true, order: [:year, :month, :day] } %>
     </div>
 
     <div class="row">
